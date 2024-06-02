@@ -1,49 +1,30 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     provider = "prisma-client-js"
 }
 
 datasource db {
     provider = "postgresql"
-    // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
-}
-
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
-
-    @@index([name])
 }
 
 // Necessary for Next auth
 model Account {
-    id                       String  @id @default(cuid())
-    userId                   String
-    type                     String
-    provider                 String
-    providerAccountId        String
-    refresh_token            String? // @db.Text
-    access_token             String? // @db.Text
-    expires_at               Int?
-    token_type               String?
-    scope                    String?
-    id_token                 String? // @db.Text
-    session_state            String?
-    user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    refresh_token_expires_in Int?
+    id                String  @id @default(cuid())
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String? // @db.Text
+    access_token      String? // @db.Text
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? // @db.Text
+    session_state     String?
+    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
+    @@map("accounts")
 }
 
 model Session {
@@ -52,23 +33,101 @@ model Session {
     userId       String
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("sessions")
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
-    posts         Post[]
+    id               String     @id @default(cuid())
+    name             String?
+    createdAt        DateTime   @default(now())
+    updatedAt        DateTime   @updatedAt
+    email            String?    @unique
+    emailVerified    DateTime?
+    subscriptionPlan String     @default("free")
+    validUntil       DateTime?
+    image            String?
+    accounts         Account[]
+    sessions         Session[]
+    UserLogin        UserLogin?
+    Workspace        Workspace? @relation(fields: [workspaceId], references: [id])
+    workspaceId      String?
+    FormData         FormData[]
+
+    @@map("users")
+}
+
+model UserLogin {
+    id           String @id @default(cuid())
+    email        String @unique
+    passwordHash String
+    userId       String @unique
+    user         User   @relation(fields: [userId], references: [id])
+
+    @@map("userlogins")
 }
 
 model VerificationToken {
-    identifier String
+    identifier String   @id @default(cuid())
     token      String   @unique
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Workspace {
+    id       String     @id @default(cuid())
+    name     String?
+    users    User[]
+    FormData FormData[]
+}
+
+model FormData {
+    id              String      @id @default(cuid())
+    rut             String?
+    nombre_completo String?
+    telefono        String?
+    direccion       String?
+    comuna          String?
+    region          String?
+    nacionalidad    String?
+    mail            String?
+    instagram       String?
+    facebook        String?
+    twitter         String?
+    etiqueta_1      String?
+    etiqueta_2      String?
+    etiqueta_3      String?
+    comentario      String?
+    workspaceId     String?
+    workspace       Workspace?  @relation(fields: [workspaceId], references: [id])
+    user            User?       @relation(fields: [userId], references: [id])
+    userId          String?
+    padronDataId    String?
+    padron          PadronData? @relation(fields: [padronDataId], references: [id])
+
+    @@map("formdata")
+}
+
+model PadronData {
+    id                   String     @id @default(cuid())
+    NOMBRES              String?
+    APELLIDO_PATERNO     String?
+    APELLIDO_MATERNO     String?
+    RUN                  String?
+    DV                   String?
+    SEXO                 String?
+    CALLE                String?
+    NUMERO               String?
+    LETRA                String?
+    RESTO_DOMICILIO      String?
+    GLOSACIRCUNSCRIPCION String?
+    GLOSACOMUNA          String?
+    GLOSAPROVINCIA       String?
+    GLOSAREGION          String?
+    GLOSAPAIS            String?
+    MESA                 String?
+    FormData             FormData[]
+
+    @@map("padrondata")
 }
