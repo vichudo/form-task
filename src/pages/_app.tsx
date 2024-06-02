@@ -2,8 +2,9 @@ import { GeistSans } from "geist/font/sans";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
+import { Toaster } from "react-hot-toast";
 
-import { api } from "~/utils/api";
+import { trpc } from "~/utils/api";
 
 import "~/styles/globals.css";
 
@@ -12,12 +13,15 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
-      <main className={GeistSans.className}>
-        <Component {...pageProps} />
-      </main>
-    </SessionProvider>
+    <>
+      <Toaster />
+      <SessionProvider session={session}>
+        <main className={GeistSans.className}>
+          <Component {...pageProps} />
+        </main>
+      </SessionProvider>
+    </>
   );
 };
 
-export default api.withTRPC(MyApp);
+export default trpc.withTRPC(MyApp);
