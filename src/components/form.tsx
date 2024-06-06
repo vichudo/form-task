@@ -1,4 +1,5 @@
 import { PadronData } from "@prisma/client";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm, Controller, FieldValues } from "react-hook-form";
 import Select, { SingleValue } from "react-select";
@@ -33,6 +34,9 @@ export const Form = () => {
         }
     });
 
+    const { data: session } = useSession()
+
+
     const [selectedRut, setSelectedRut] = useState("");
     const [selectedOption, setSelectedOption] = useState<SelectOption | null>(null);
 
@@ -41,11 +45,11 @@ export const Form = () => {
         { enabled: selectedRut.length > 0 }
     );
 
-    const submitFormMutation = trpc.formRouter.submitForm.useMutation();
+    const { mutateAsync: submitFormMutation } = trpc.formRouter.submitForm.useMutation();
 
     const onSubmit = async (data: FormData) => {
         try {
-            await submitFormMutation.mutateAsync(data);
+            await submitFormMutation({ ...data, userId: session?.user?.id });
             console.log("Form submitted successfully");
             // Reset form or perform any other actions
             reset();
@@ -232,7 +236,7 @@ export const Form = () => {
 
                 <div>
                     <label htmlFor="comentario" className="block text-sm font-medium leading-6 text-gray-900">
-                        Comentario
+                        Comentario (Opcional)
                     </label>
                     <div className="mt-2">
                         <Controller
@@ -247,7 +251,7 @@ export const Form = () => {
                                 />
                             )}
                         />
-                        <p className="mt-3 text-sm leading-6 text-gray-600">Escribe unas pocas oraciones sobre ti.</p>
+                        <p className="mt-3 text-sm leading-6 text-gray-600">Escribe aquello que estimes conveniente de este contacto.</p>
                     </div>
                 </div>
             </div>
