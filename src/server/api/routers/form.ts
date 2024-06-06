@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const formRouter = createTRPCRouter({
     submitForm: publicProcedure
@@ -26,13 +26,48 @@ export const formRouter = createTRPCRouter({
         )
         .mutation(async ({ ctx, input }) => {
 
+            // const workspace = await ctx.prisma.workspace.findFirst({
+            //     where: {
+            //         users: {
+            //             some: {
+            //                 id: ctx.session?.user.id
+            //             }
+            //         }
+            //     },
+            //     select: {
+            //         id: true
+            //     }
+            // })
+
 
             const formData = await ctx.prisma.formData.create({
                 data: {
-                    ...input
+                    ...input,
+                    userId: ctx.session?.user.id
                 },
             });
 
+
+            // if (!workspace) {
+            //     await ctx.prisma.workspace.create({
+            //         data: {
+            //             FormData: {
+            //                 create: {
+            //                     ...formData,
+            //                     userId: ctx.session?.user.id
+            //                 }
+            //             }
+            //         }
+            //     })
+            // }
+
             return formData;
         }),
+    retrieveContacts: protectedProcedure.query(async ({ ctx }) => {
+        return await ctx.prisma.formData.findMany({
+            where: {
+                userId: ctx.session.user.id
+            }
+        })
+    })
 });
