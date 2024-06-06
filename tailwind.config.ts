@@ -1,14 +1,17 @@
-import { type Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme";
-
-export default {
-  content: ["./src/**/*.tsx"],
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+      scrollbarHide: {
+        "-ms-overflow-style": "none", // for Internet Explorer, Edge
+        "scrollbar-width": "none", // for Firefox
+        "&::-webkit-scrollbar": {
+          // for Chrome, Safari, and Opera
+          display: "none",
+        },
       },
     },
+    plugins: [require("@tailwindcss/forms")],
   },
-  plugins: [],
-} satisfies Config;
+};
