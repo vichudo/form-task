@@ -10,6 +10,9 @@ import Image from "next/image";
 
 type formType = z.infer<typeof loginSchema>;
 
+const emailSubject: string = encodeURIComponent("Me interesa FormTazk")
+const emailText: string = encodeURIComponent("Hola, estoy interesado en utilizar sus servicios, este es mi mail y mi número de celular es: [ingresa tu número acá]\n\nGracias!")
+
 export function Login() {
     const { register, handleSubmit } = useForm<formType>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -56,10 +59,10 @@ export function Login() {
                                 <p className="text-base text-wrap text-end flex flex-col font-normal text-gray-900 font-pj">
                                     No tienes cuenta?{" "}
                                     <Link
-                                        href="/signup"
+                                        href={`mailto:formtazk@gmail.com?subject=${emailSubject}&body=${emailText}`}
                                         className="font-bold rounded hover:underline focus:outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
                                     >
-                                        Regístrate
+                                        Contáctanos
                                     </Link>
                                 </p>
                             </div>
