@@ -69,5 +69,14 @@ export const formRouter = createTRPCRouter({
                 userId: ctx.session.user.id
             }
         })
-    })
+    }),
+    deleteContactById: protectedProcedure
+        .input(z.object({ id: z.string() }))
+        .mutation(async ({ ctx, input }) => {
+            return await ctx.prisma.formData.delete({
+                where: {
+                    id: input.id
+                }
+            })
+        })
 });
