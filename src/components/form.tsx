@@ -2,6 +2,7 @@ import { PadronData } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm, Controller, FieldValues } from "react-hook-form";
+import toast from "react-hot-toast";
 import Select, { SingleValue } from "react-select";
 import { trpc } from "~/utils/api";
 import { RouterInputs } from "~/utils/api";
@@ -45,7 +46,7 @@ export const Form = () => {
         { enabled: selectedRut.length > 0 }
     );
 
-    const { mutateAsync: submitFormMutation } = trpc.formRouter.submitForm.useMutation();
+    const { mutateAsync: submitFormMutation, status } = trpc.formRouter.submitForm.useMutation();
 
     const onSubmit = async (data: FormData) => {
         try {
@@ -53,6 +54,7 @@ export const Form = () => {
             console.log("Form submitted successfully");
             // Reset form or perform any other actions
             reset();
+            toast.success("Contacto Agregado")
         } catch (error) {
             console.error("Error submitting form:", error);
         }
@@ -267,7 +269,7 @@ export const Form = () => {
                     type="submit"
                     className="inline-flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition duration-150 ease-in-out hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                    Guardar
+                    {status === 'pending' ? 'Cargando...' : 'Guardar'}
                 </button>
             </div>
         </form>
