@@ -10,6 +10,7 @@ export const ContactsTable = () => {
     const [idToDelete, setIdToDelete] = useState<string>()
     const [displayDeleteModal, setDisplayDeleteModal] = useState<boolean>(false)
     const { mutateAsync: deleteContact } = trpc.formRouter.deleteContactById.useMutation()
+    const { mutateAsync: exportContactsToExcel } = trpc.formRouter.exportContactsToExcel.useMutation()
 
     if (isLoading) {
         return (
@@ -38,6 +39,29 @@ export const ContactsTable = () => {
         refetch()
     }
 
+    const handleExport = async () => {
+        try {
+            const { base64String } = await exportContactsToExcel();
+            const binaryString = atob(base64String);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            const blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'contactos.xlsx';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            toast.success('Excel exportado');
+        } catch (error) {
+            toast.error('Ocurrió un error exportando excel');
+        }
+    };
     return (
         <>
             <WarningModal
@@ -50,9 +74,6 @@ export const ContactsTable = () => {
                 }}
                 confirmAction={handleDeletion}
             />
-            {/* <GenericModal open={openCreateModal} setOpen={setOpenCreateModal}>
-                <Form />
-            </GenericModal> */}
             <div className="py-8 bg-white sm:py-12 lg:py-16">
                 <div className="px-4 mx-2 max-w-full sm:px-6 lg:px-8">
                     <div className="flex flex-col items-center justify-between sm:flex-row">
@@ -66,14 +87,13 @@ export const ContactsTable = () => {
                                 <PlusCircleIcon className="w-5 h-5 mr-2 -ml-1" />
                                 Crear nuevo
                             </Link>
-                            <button type="button" className="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-auto sm:text-base">
+                            <button type="button" onClick={handleExport} className="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-auto sm:text-base">
                                 <DocumentArrowDownIcon className="w-5 h-5 mr-2 -ml-1" />
                                 Exportar a excel
                             </button>
                         </div>
                     </div>
 
-                    {/* Desktop view */}
                     <div className="hidden mt-8 overflow-x-scroll lg:block">
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead>
@@ -111,7 +131,6 @@ export const ContactsTable = () => {
                         </table>
                     </div>
 
-                    {/* Mobile view */}
                     <div className="mt-8 space-y-3 lg:hidden">
                         {data?.map((contact) => (
                             <div key={contact.id} className="bg-white shadow-lg rounded-lg">
