@@ -1,10 +1,11 @@
 
 import { XCircleIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React, { type FC } from 'react';
 
 export const SimpleCTA: FC = () => {
+    const { status } = useSession()
     return (
         <section className="py-10 bg-white sm:py-16 lg:py-24">
             <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
@@ -31,12 +32,15 @@ export const SimpleCTA: FC = () => {
                             <ComputerDesktopIcon className="w-5 h-5 mr-2 -ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" />
                             Ir a App
                         </Link>
-                        <button onClick={() => signOut()} className="inline-flex items-center justify-center px-4 py-4 mt-8 font-semibold text-red-100 transition-all duration-200 bg-red-600 border border-transparent rounded-md lg:mt-12 hover:bg-blue-700 focus:bg-blue-700" role="button">
-                            <XCircleIcon className="w-5 h-5 mr-2 -ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </XCircleIcon>
-                            Cerrar Sesión
-                        </button>
+                        {
+                            status === 'authenticated' &&
+                            <button onClick={() => signOut()} className="inline-flex items-center justify-center px-4 py-4 mt-8 font-semibold text-red-100 transition-all duration-200 bg-red-600 border border-transparent rounded-md lg:mt-12 hover:bg-red-700 focus:bg-red-700" role="button">
+                                <XCircleIcon className="w-5 h-5 mr-2 -ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </XCircleIcon>
+                                Cerrar Sesión
+                            </button>
+                        }
                     </div>
                 </div>
             </div>
