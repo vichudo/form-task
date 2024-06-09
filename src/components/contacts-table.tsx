@@ -1,19 +1,55 @@
 import React, { useState } from 'react';
 import { trpc } from '~/utils/api';
 import { UserIcon, PlusCircleIcon, DocumentArrowDownIcon } from '@heroicons/react/24/outline';
-import { Form } from './form';
 import Link from 'next/link';
+import { WarningModal } from './warning-modal';
+import toast from 'react-hot-toast';
 
 export const ContactsTable = () => {
-    const { data, isLoading } = trpc.formRouter.retrieveContacts.useQuery();
-    const [openCreateModal, setOpenCreateModal] = useState<boolean>(false)
+    const { data, isLoading, refetch } = trpc.formRouter.retrieveContacts.useQuery();
+    const [idToDelete, setIdToDelete] = useState<string>()
+    const [displayDeleteModal, setDisplayDeleteModal] = useState<boolean>(false)
+    const { mutateAsync: deleteContact } = trpc.formRouter.deleteContactById.useMutation()
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return (
+            <div className="flex items-center justify-center mt-16 ">
+                <div className="flex space-x-2">
+                    <div className="w-4 h-4 bg-indigo-500 rounded-full animate-bounce"></div>
+                    <div className="w-4 h-4 bg-indigo-500 rounded-full animate-bounce animation-delay-200"></div>
+                    <div className="w-4 h-4 bg-indigo-500 rounded-full animate-bounce animation-delay-400"></div>
+                </div>
+            </div>
+        );
+    }
+
+    const handleDeleteModal = (idToDelete: string) => {
+        setIdToDelete(idToDelete)
+        setDisplayDeleteModal(true)
+    }
+
+    const handleDeletion = async () => {
+        if (!idToDelete) return;
+        await toast.promise(deleteContact({ id: idToDelete }), {
+            error: "Ocurrió un error eliminando el contacto",
+            loading: "Eliminando...",
+            success: "Contacto eliminado"
+        })
+        refetch()
     }
 
     return (
         <>
+            <WarningModal
+                bindings={{ open: displayDeleteModal, setOpen: setDisplayDeleteModal }}
+                title='Estas seguro que deseas borrar este contacto?'
+                description={'Esta acción es totalmente irreversible'}
+                buttons={{
+                    close: 'Cancelar',
+                    confirm: 'Eliminar contacto'
+                }}
+                confirmAction={handleDeletion}
+            />
             {/* <GenericModal open={openCreateModal} setOpen={setOpenCreateModal}>
                 <Form />
             </GenericModal> */}
@@ -65,9 +101,9 @@ export const ContactsTable = () => {
                                                 Editar
                                             </a>
                                             <span className="mx-2 text-gray-300">|</span>
-                                            <a href="#" className="text-red-600 hover:text-red-900">
+                                            <button onClick={() => handleDeleteModal(contact.id)} className="text-red-600 hover:text-red-900">
                                                 Eliminar
-                                            </a>
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
@@ -114,7 +150,7 @@ export const ContactsTable = () => {
                                         <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                             Editar
                                         </button>
-                                        <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                        <button onClick={() => handleDeleteModal(contact.id)} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                                             Eliminar
                                         </button>
                                     </div>
