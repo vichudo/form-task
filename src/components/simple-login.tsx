@@ -34,14 +34,6 @@ export function Login() {
 
     return (
         <section className="py-12 bg-gray-50 sm:py-16 lg:py-20">
-            {/* <h1 className="text-6xl text-center font-bold pb-8">
-                <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
-                    Legis
-                </span>
-                <span className="bg-gradient-to-r underline underline-offset-2 from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                    Lens
-                </span>
-            </h1> */}
             <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className="relative max-w-md mx-auto lg:max-w-lg">
                     <div className="absolute -inset-2">
@@ -104,12 +96,13 @@ export function Login() {
                                                 Contraseña
                                             </label>
 
-                                            <Link
+                                            {/* <Link
                                                 href="#"
+                                                tabIndex={-1}  // Prevent tabbing to this link
                                                 className="text-base font-normal text-gray-500 rounded font-pj hover:text-gray-900 hover:underline focus:outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
                                             >
                                                 La olvidaste?
-                                            </Link>
+                                            </Link> */}
                                         </div>
                                         <div className="mt-2.5">
                                             <input

@@ -146,7 +146,7 @@ export const Navbar: FC = () => {
                                     <p className="text-center text-base font-medium text-gray-500">
                                         <button
                                             onClick={() => signOut()}
-                                            className="text-gray-900 hover:underline">
+                                            className="text-red-600 hover:underline">
                                             Log Out
                                         </button>
                                     </p>
