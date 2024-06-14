@@ -3,13 +3,13 @@ generator client {
 }
 
 datasource db {
-    provider = "postgresql"
+    provider = "mongodb"
     url      = env("DATABASE_URL")
 }
 
 // Necessary for Next auth
 model Account {
-    id                String  @id @default(cuid())
+    id                String  @id @default(cuid()) @map("_id")
     userId            String
     type              String
     provider          String
@@ -28,7 +28,7 @@ model Account {
 }
 
 model Session {
-    id           String   @id @default(cuid())
+    id           String   @id @default(cuid()) @map("_id")
     sessionToken String   @unique
     userId       String
     expires      DateTime
@@ -38,7 +38,7 @@ model Session {
 }
 
 model User {
-    id               String     @id @default(cuid())
+    id               String     @id @default(cuid()) @map("_id")
     name             String?
     createdAt        DateTime   @default(now())
     updatedAt        DateTime   @updatedAt
@@ -58,7 +58,7 @@ model User {
 }
 
 model UserLogin {
-    id           String @id @default(cuid())
+    id           String @id @default(cuid()) @map("_id")
     email        String @unique
     passwordHash String
     userId       String @unique
@@ -68,7 +68,7 @@ model UserLogin {
 }
 
 model VerificationToken {
-    identifier String   @id @default(cuid())
+    identifier String   @id @default(cuid()) @map("_id")
     token      String   @unique
     expires    DateTime
 
@@ -76,14 +76,14 @@ model VerificationToken {
 }
 
 model Workspace {
-    id       String     @id @default(cuid())
+    id       String     @id @default(cuid()) @map("_id")
     name     String?
     users    User[]
     FormData FormData[]
 }
 
 model FormData {
-    id              String      @id @default(cuid())
+    id              String      @id @default(cuid()) @map("_id")
     rut             String?
     nombre_completo String?
     telefono        String?
@@ -110,7 +110,7 @@ model FormData {
 }
 
 model PadronData {
-    id                   String     @id @default(cuid())
+    id                   String     @id @default(cuid()) @map("_id")
     NOMBRES              String?
     APELLIDO_PATERNO     String?
     APELLIDO_MATERNO     String?
@@ -129,5 +129,6 @@ model PadronData {
     MESA                 String?
     FormData             FormData[]
 
+    @@index([RUN])
     @@map("padrondata")
 }
