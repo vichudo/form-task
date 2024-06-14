@@ -3,17 +3,19 @@ import fs from 'fs';
 import path from 'path';
 import csv from 'csv-parser';
 
+const BATCH_SIZE = 1000; // Adjust based on your memory and performance needs
+
 export const dummyRouter = createTRPCRouter({
     loadData: publicProcedure.mutation(async ({ ctx }) => {
-        // Assuming the CSV file is in the root directory of your project
-        const csvFilePath = path.resolve(__dirname, '/Users/vicentegonzalez/Documents/Github/form-task/src/server/api/routers/Padrón_Provisorio_Chile_2021.csv');
+        const csvFilePath = path.resolve(__dirname, 'Padrón Provisorio Chile 2021 (1).txt');
         const records: any[] = [];
+        let batch: any[] = [];
 
         return new Promise((resolve, reject) => {
-            fs.createReadStream(csvFilePath)
-                .pipe(csv())
-                .on('data', (row) => {
-                    records.push({
+            const stream = fs.createReadStream(csvFilePath, { encoding: 'utf8' })
+                .pipe(csv({ separator: ';' })) // Specify semicolon as the delimiter
+                .on('data', async (row) => {
+                    batch.push({
                         NOMBRES: row.NOMBRES,
                         APELLIDO_PATERNO: row.APELLIDO_PATERNO,
                         APELLIDO_MATERNO: row.APELLIDO_MATERNO,
@@ -31,16 +33,28 @@ export const dummyRouter = createTRPCRouter({
                         GLOSAPAIS: row.GLOSAPAIS,
                         MESA: row.MESA
                     });
+
+                    if (batch.length >= BATCH_SIZE) {
+                        stream.pause(); // Pause the stream to avoid overloading
+                        try {
+                            await ctx.prisma.padronData.createMany({ data: batch });
+                            batch = [];
+                            stream.resume(); // Resume the stream after the batch is inserted
+                        } catch (error) {
+                            reject(error);
+                            stream.destroy();
+                        }
+                    }
                 })
                 .on('end', async () => {
-                    try {
-                        await ctx.prisma.padronData.createMany({
-                            data: records
-                        });
-                        resolve({ success: true });
-                    } catch (error) {
-                        reject(error);
+                    if (batch.length > 0) {
+                        try {
+                            await ctx.prisma.padronData.createMany({ data: batch });
+                        } catch (error) {
+                            return reject(error);
+                        }
                     }
+                    resolve({ success: true });
                 })
                 .on('error', (error) => {
                     reject(error);
