@@ -4,13 +4,21 @@ import { UserIcon, PlusCircleIcon, DocumentArrowDownIcon } from '@heroicons/reac
 import Link from 'next/link';
 import { WarningModal } from './warning-modal';
 import toast from 'react-hot-toast';
+import { GenericModal } from './generic-modal';
+import { useAtom } from 'jotai';
+import { selectedContact } from './store';
+import { EditForm } from './edit-form';
+
+
 
 export const ContactsTable = () => {
     const { data, isLoading, refetch } = trpc.formRouter.retrieveContacts.useQuery();
     const [idToDelete, setIdToDelete] = useState<string>()
     const [displayDeleteModal, setDisplayDeleteModal] = useState<boolean>(false)
+    const [displayEditModal, setDisplayEditModal] = useState<boolean>(false)
     const { mutateAsync: deleteContact } = trpc.formRouter.deleteContactById.useMutation()
     const { mutateAsync: exportContactsToExcel } = trpc.formRouter.exportContactsToExcel.useMutation()
+    const [selectedOption, setSelectedOption] = useAtom(selectedContact)
 
     if (isLoading) {
         return (
@@ -39,6 +47,11 @@ export const ContactsTable = () => {
         refetch()
     }
 
+    const handleEditModal = (contact: any) => {
+        setDisplayEditModal(true)
+        setSelectedOption(contact)
+    }
+
     const handleExport = async () => {
         try {
             const { base64String } = await exportContactsToExcel();
@@ -64,6 +77,9 @@ export const ContactsTable = () => {
     };
     return (
         <>
+            <GenericModal open={displayEditModal} setOpen={setDisplayEditModal}>
+                <EditForm setOpen={setDisplayEditModal} />
+            </GenericModal>
             <WarningModal
                 bindings={{ open: displayDeleteModal, setOpen: setDisplayDeleteModal }}
                 title='Estas seguro que deseas borrar este contacto?'
@@ -117,9 +133,9 @@ export const ContactsTable = () => {
                                         <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{contact.comuna}</td>
                                         <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{contact.region}</td>
                                         <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                            <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                                            <button onClick={() => handleEditModal(contact)} className="text-indigo-600 hover:text-indigo-900">
                                                 Editar
-                                            </a>
+                                            </button>
                                             <span className="mx-2 text-gray-300">|</span>
                                             <button onClick={() => handleDeleteModal(contact.id)} className="text-red-600 hover:text-red-900">
                                                 Eliminar
@@ -166,7 +182,7 @@ export const ContactsTable = () => {
                                 </div>
                                 <div className="px-4 py-4 bg-gray-50 sm:px-6">
                                     <div className="flex justify-end space-x-3">
-                                        <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        <button onClick={() => handleEditModal(contact)} type="button" className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                             Editar
                                         </button>
                                         <button onClick={() => handleDeleteModal(contact.id)} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
