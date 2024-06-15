@@ -92,7 +92,7 @@ export const formRouter = createTRPCRouter({
                     { direccion: { contains: search, mode: 'insensitive' } },
                     { comuna: { contains: search, mode: 'insensitive' } },
                     { region: { contains: search, mode: 'insensitive' } },
-                ] : {},
+                ] : undefined,
             };
 
             const contacts = await ctx.prisma.formData.findMany({
