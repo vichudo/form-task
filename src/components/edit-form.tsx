@@ -8,8 +8,8 @@ import Select, { SingleValue } from "react-select";
 import { trpc } from "~/utils/api";
 import { RouterInputs } from "~/utils/api";
 import { selectedContact } from "./store";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useRutFormatter } from "~/hooks/useFormatRut";
+import { ClipboardIcon } from "@heroicons/react/24/outline";
 
 type FormData = RouterInputs['formRouter']['submitForm'];
 
@@ -95,13 +95,13 @@ export const EditForm: FC<EditFormProps> = ({ setOpen }) => {
     const onSubmit = async (data: FormData) => {
         try {
             await submitFormMutation({ ...data, userId: session?.user?.id, padronDataId: padronData?.[0]?.id, id: selectedOption.id });
-            reset();
+            // reset();
             toast.success("Contacto Actualizado");
-            refetchContacts()
             setOpen(false)
         } catch (error) {
             console.error("Error submitting form:", error);
         }
+        refetchContacts()
     };
 
     const handleSearchClick = () => {
@@ -130,6 +130,36 @@ export const EditForm: FC<EditFormProps> = ({ setOpen }) => {
         }
     };
 
+    const copyToClipboard = () => {
+        const data = {
+            rut: watch("rut"),
+            nombre_completo: watch("nombre_completo"),
+            telefono: watch("telefono"),
+            direccion: watch("direccion"),
+            comuna: watch("comuna"),
+            region: watch("region"),
+            nacionalidad: watch("nacionalidad"),
+            mail: watch("mail"),
+            instagram: watch("instagram"),
+            facebook: watch("facebook"),
+            twitter: watch("twitter"),
+            etiqueta_1: watch("etiqueta_1"),
+            etiqueta_2: watch("etiqueta_2"),
+            etiqueta_3: watch("etiqueta_3"),
+            comentario: watch("comentario"),
+        };
+
+        const formattedData = Object.entries(data)
+            .filter(([key, value]) => value) // Filter out empty values
+            .map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ')}: ${value}`)
+            .join('\n');
+
+        navigator.clipboard.writeText(formattedData)
+            .then(() => toast.success("Datos copiados al portapapeles"))
+            .catch(() => toast.error("Error al copiar los datos"));
+    };
+
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
             <div className="flex justify-between items-center gap-8">
@@ -139,6 +169,14 @@ export const EditForm: FC<EditFormProps> = ({ setOpen }) => {
                         Modifica los campos del contacto, si deseas cambiar el rut, deberás crear otro contacto con el rut correcto
                     </p>
                 </div>
+                <button
+                    type="button"
+                    onClick={copyToClipboard}
+                    className="inline-flex justify-center rounded-md bg-indigo-600 px-2 py-2 text-sm gap-2 font-semibold text-white shadow-sm transition duration-150 ease-in-out hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                    <span>Copiar</span>
+                    <ClipboardIcon className="w-4 h-4"></ClipboardIcon>
+                </button>
             </div>
 
             <div className="space-y-6">
@@ -150,18 +188,10 @@ export const EditForm: FC<EditFormProps> = ({ setOpen }) => {
                         <input
                             type="text"
                             id="rut"
-                            // disabled
                             {...register("rut")}
                             onKeyDown={handleKeyDown}
                             className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
-                        {/* <button
-                            type="button"
-                            onClick={handleSearchClick}
-                            className="inline-flex items-center justify-center rounded-md bg-indigo-600 p-2 text-white shadow-sm transition duration-150 ease-in-out hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                        >
-                            <MagnifyingGlassIcon className="h-5 w-5" />
-                        </button> */}
                     </div>
                 </div>
 
