@@ -16,6 +16,11 @@ type SelectOption = {
     label: string;
 };
 
+const phonePrefixOptions = [
+    { value: '+52', label: '+52' },
+    { value: '+56', label: '+56' },
+];
+
 export const Form = () => {
     const { register, control, setValue, handleSubmit, reset, watch } = useForm<FormData>({
         defaultValues: {
@@ -41,6 +46,8 @@ export const Form = () => {
 
     const [selectedRut, setSelectedRut] = useState<string>("");
     const [selectedOption, setSelectedOption] = useState<SelectOption | null>(null);
+    const [phonePrefix, setPhonePrefix] = useState(phonePrefixOptions[1]);
+    const [phoneError, setPhoneError] = useState<string>("");
     const rut = watch("rut");
     const formattedRut = useRutFormatter(String(rut));
 
@@ -55,7 +62,6 @@ export const Form = () => {
 
     useEffect(() => {
         if (padronData && padronData.length > 0) {
-            // Automatically select the first result
             const firstOption = {
                 value: 0,
                 label: `${padronData[0]?.NOMBRES ?? ''} ${padronData[0]?.APELLIDO_PATERNO ?? ''} ${padronData[0]?.APELLIDO_MATERNO ?? ''}`
@@ -83,7 +89,7 @@ export const Form = () => {
         setSelectedRut(String(rut));
     };
 
-    const handlePadronDataSelect = (selectedOption: SingleValue<SelectOption>) => {
+    const handlePadronDataSelect = (selectedOption: SingleValue<SelectOption> | null) => {
         setSelectedOption(selectedOption);
         if (!selectedOption) return;
         const data = padronData ? padronData[selectedOption.value] : null;
@@ -110,13 +116,32 @@ export const Form = () => {
         setSelectedRut("");
     };
 
+    const handlePhoneChange = (value: string) => {
+        const cleanedValue = value.replace(/\D/g, "");
+        if (cleanedValue.length > 9) {
+            setPhoneError("El número no puede tener más de 9 dígitos.");
+        } else {
+            setPhoneError("");
+            const formattedValue = cleanedValue.replace(/(\d{1})(\d{4})(\d{4})/, "$1 $2 $3");
+            setValue("telefono", formattedValue);
+        }
+    };
+
+    const validatePhone = (value: string) => {
+        const cleanedValue = value.replace(/\D/g, "");
+        if (cleanedValue.length < 9 && cleanedValue.length > 0) {
+            setPhoneError("El número debe tener 9 dígitos.");
+        } else {
+            setPhoneError("");
+        }
+    };
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-
             <div className="flex justify-between items-center gap-8">
                 <div>
                     <h2 className="text-2xl font-semibold leading-7 text-gray-900">Ingreso de contacto</h2>
-                    <p className="mt-1 text-xs md:text-sm leading-6 text-gray-600 ">
+                    <p className="mt-1 text-xs md:text-sm leading-6 text-gray-600">
                         Ingresa el rut del contacto para verificar su información del padrón, si existe un registro la información se cargará automáticamente.
                     </p>
                 </div>
@@ -138,6 +163,7 @@ export const Form = () => {
                         <input
                             type="text"
                             id="rut"
+                            placeholder="12345678-9"
                             {...register("rut")}
                             className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             onKeyDown={handleKeyDown}
@@ -177,7 +203,7 @@ export const Form = () => {
                                             label: `${data.NOMBRES ?? ''} ${data.APELLIDO_PATERNO ?? ''} ${data.APELLIDO_MATERNO ?? ''}`,
                                         }))}
                                         value={selectedOption}
-                                        onChange={(option) => handlePadronDataSelect(option as SingleValue<SelectOption>)}
+                                        onChange={(option) => handlePadronDataSelect(option as SingleValue<SelectOption> | null)}
                                         className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
                                 )}
@@ -206,19 +232,27 @@ export const Form = () => {
                     )}
                 </div>
 
-                {["nombre_completo", "telefono", "direccion", "comuna", "region", "nacionalidad", "mail"].map((field) => (
-                    <div key={field}>
-                        <label htmlFor={field} className="block text-sm font-medium leading-6 text-gray-900">
-                            {field.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                {["nombre_completo", "direccion", "comuna", "region", "nacionalidad", "mail"].map((fieldName) => (
+                    <div key={fieldName}>
+                        <label htmlFor={fieldName} className="block text-sm font-medium leading-6 text-gray-900">
+                            {fieldName.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                         </label>
                         <div className="mt-2">
                             <Controller
-                                name={field as keyof FormData}
+                                name={fieldName as keyof FormData}
                                 control={control}
                                 render={({ field }) => (
                                     <input
-                                        type={field.name === "mail" ? "email" : field.name === "telefono" ? "tel" : "text"}
+                                        type={field.name === "mail" ? "email" : "text"}
                                         id={field.name}
+                                        placeholder={
+                                            field.name === "nombre_completo" ? "Juan Pérez" :
+                                                field.name === "direccion" ? "Av. Siempre Viva 742" :
+                                                    field.name === "comuna" ? "Providencia" :
+                                                        field.name === "region" ? "Región Metropolitana" :
+                                                            field.name === "nacionalidad" ? "Chilena" :
+                                                                field.name === "mail" ? "juan.perez@example.com" : ""
+                                        }
                                         {...field}
                                         className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
@@ -229,22 +263,58 @@ export const Form = () => {
                 ))}
 
                 <div className="border-t border-gray-200 pt-6">
+                    <label className="block text-lg font-medium leading-6 text-gray-900">Teléfono</label>
+                    <div className="mt-2 flex items-center space-x-2">
+                        <Select
+                            options={phonePrefixOptions}
+                            value={phonePrefix}
+                            onChange={(option) => setPhonePrefix(option as any)}
+                            className="w-24 text-xs"
+                        />
+                        <Controller
+                            name="telefono"
+                            control={control}
+                            rules={{ pattern: /^\d{9}$/ }}
+                            render={({ field: { onChange, ...field } }) => (
+                                <input
+                                    type="tel"
+                                    id="telefono"
+                                    placeholder="912345678"
+                                    {...field}
+                                    onChange={(e) => {
+                                        handlePhoneChange(e.target.value);
+                                        onChange(e);
+                                    }}
+                                    onBlur={(e) => validatePhone(e.target.value)}
+                                    className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                            )}
+                        />
+                    </div>
+                    {phoneError && (
+                        <p className="mt-2 text-sm text-red-600">{phoneError}</p>
+                    )}
+                </div>
+
+                <div className="border-t border-gray-200 pt-6">
                     <label className="block text-lg font-medium leading-6 text-gray-900">Redes Sociales (Opcional)</label>
                     <p className="mt-1 text-sm text-gray-600">Estos campos son opcionales.</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2">
-                        {["instagram", "facebook", "twitter"].map((field) => (
-                            <div key={field}>
-                                <label htmlFor={field} className="block text-sm font-medium leading-6 text-gray-900">
-                                    {field.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                        {["instagram", "facebook", "twitter"].map((fieldName) => (
+                            <div key={fieldName}>
+                                <label htmlFor={fieldName} className="block text-sm font-medium leading-6 text-gray-900">
+                                    {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}
                                 </label>
-                                <div className="mt-2">
+                                <div className="mt-2 flex items-center space-x-2">
+                                    {fieldName === "facebook" ? null : <span className="text-gray-500">@</span>}
                                     <Controller
-                                        name={field as keyof FormData}
+                                        name={fieldName as keyof FormData}
                                         control={control}
                                         render={({ field }) => (
                                             <input
                                                 type="text"
                                                 id={field.name}
+                                                placeholder={field.name}
                                                 {...field}
                                                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             />
@@ -255,23 +325,25 @@ export const Form = () => {
                         ))}
                     </div>
                 </div>
+
                 <div className="border-t border-gray-200 pt-6">
                     <label className="block text-lg font-medium leading-6 text-gray-900">Etiquetas (Opcional)</label>
                     <p className="mt-1 text-sm text-gray-600">Estos campos son opcionales.</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2">
-                        {["etiqueta_1", "etiqueta_2", "etiqueta_3"].map((field) => (
-                            <div key={field}>
-                                <label htmlFor={field} className="block text-sm font-medium leading-6 text-gray-900">
-                                    {field.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                        {["etiqueta_1", "etiqueta_2", "etiqueta_3"].map((fieldName) => (
+                            <div key={fieldName}>
+                                <label htmlFor={fieldName} className="block text-sm font-medium leading-6 text-gray-900">
+                                    {fieldName.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                                 </label>
                                 <div className="mt-2">
                                     <Controller
-                                        name={field as keyof FormData}
+                                        name={fieldName as keyof FormData}
                                         control={control}
                                         render={({ field }) => (
                                             <input
                                                 type="text"
                                                 id={field.name}
+                                                placeholder={`Etiqueta ${field.name.split('_')[1]}`}
                                                 {...field}
                                                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             />
@@ -295,6 +367,7 @@ export const Form = () => {
                                 <textarea
                                     id="comentario"
                                     {...field}
+                                    placeholder="Escribe tus comentarios aquí..."
                                     rows={3}
                                     className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
