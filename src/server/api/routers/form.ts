@@ -75,13 +75,39 @@ export const formRouter = createTRPCRouter({
 
             return formData;
         }),
-    retrieveContacts: protectedProcedure.query(async ({ ctx }) => {
-        return await ctx.prisma.formData.findMany({
-            where: {
-                userId: ctx.session.user.id
-            }
-        })
-    }),
+    retrieveContacts: protectedProcedure
+        .input(z.object({
+            search: z.string().optional(),
+            page: z.number().optional(),
+            limit: z.number().optional(),
+        }))
+        .query(async ({ ctx, input }) => {
+            const { search, page = 1, limit = 10 } = input;
+
+            const whereClause = {
+                userId: ctx.session.user.id,
+                OR: search ? [
+                    { nombre_completo: { contains: search, mode: 'insensitive' } },
+                    { rut: { contains: search, mode: 'insensitive' } },
+                    { direccion: { contains: search, mode: 'insensitive' } },
+                    { comuna: { contains: search, mode: 'insensitive' } },
+                    { region: { contains: search, mode: 'insensitive' } },
+                ] : {},
+            };
+
+            const contacts = await ctx.prisma.formData.findMany({
+                where: whereClause as any,
+                skip: (page - 1) * limit,
+                take: limit,
+            });
+
+            const totalContacts = await ctx.prisma.formData.count({
+                where: whereClause as any,
+            });
+
+            return { contacts, totalContacts };
+        }),
+
     exportContactsToExcel: protectedProcedure.mutation(async ({ ctx }) => {
         // TODO: Include in a smart way padron data in the excel
         const contacts = await ctx.prisma.formData.findMany({
