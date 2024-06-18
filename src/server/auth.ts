@@ -85,7 +85,7 @@ export const authOptions: NextAuthOptions = {
         const { email, password } = loginSchema.parse(credentials)
         const userLogin = await prisma.userLogin.findUnique({
           where: {
-            email
+            email: email.toLowerCase()
           },
           select: {
             user: true,
@@ -107,7 +107,7 @@ export const authOptions: NextAuthOptions = {
                     email,
                   },
                   create: {
-                    email,
+                    email: email.toLowerCase(),
                     name: email.substring(0, email.indexOf('@')),
                   },
                 },

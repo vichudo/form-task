@@ -1,15 +1,16 @@
+// Deprecated: Saved just in case
 generator client {
     provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mongodb"
+    provider = "postgresql"
     url      = env("DATABASE_URL")
 }
 
 // Necessary for Next auth
 model Account {
-    id                String  @id @default(cuid()) @map("_id")
+    id                String  @id @default(cuid())
     userId            String
     type              String
     provider          String
@@ -28,7 +29,7 @@ model Account {
 }
 
 model Session {
-    id           String   @id @default(cuid()) @map("_id")
+    id           String   @id @default(cuid())
     sessionToken String   @unique
     userId       String
     expires      DateTime
@@ -38,7 +39,7 @@ model Session {
 }
 
 model User {
-    id               String     @id @default(cuid()) @map("_id")
+    id               String     @id @default(cuid())
     name             String?
     createdAt        DateTime   @default(now())
     updatedAt        DateTime   @updatedAt
@@ -58,7 +59,7 @@ model User {
 }
 
 model UserLogin {
-    id           String @id @default(cuid()) @map("_id")
+    id           String @id @default(cuid())
     email        String @unique
     passwordHash String
     userId       String @unique
@@ -68,7 +69,7 @@ model UserLogin {
 }
 
 model VerificationToken {
-    identifier String   @id @default(cuid()) @map("_id")
+    identifier String   @id @default(cuid())
     token      String   @unique
     expires    DateTime
 
@@ -76,14 +77,14 @@ model VerificationToken {
 }
 
 model Workspace {
-    id       String     @id @default(cuid()) @map("_id")
+    id       String     @id @default(cuid())
     name     String?
     users    User[]
     FormData FormData[]
 }
 
 model FormData {
-    id              String      @id @default(cuid()) @map("_id")
+    id              String      @id @default(cuid())
     rut             String?
     nombre_completo String?
     telefono        String?
@@ -105,13 +106,12 @@ model FormData {
     userId          String?
     padronDataId    String?
     padron          PadronData? @relation(fields: [padronDataId], references: [id])
-    createdAt       DateTime?   @default(now())
 
     @@map("formdata")
 }
 
 model PadronData {
-    id                   String     @id @default(cuid()) @map("_id")
+    id                   String     @id @default(cuid())
     NOMBRES              String?
     APELLIDO_PATERNO     String?
     APELLIDO_MATERNO     String?
@@ -130,6 +130,5 @@ model PadronData {
     MESA                 String?
     FormData             FormData[]
 
-    @@index([RUN])
     @@map("padrondata")
 }

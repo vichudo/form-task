@@ -20,4 +20,19 @@ export const searchRouter = createTRPCRouter({
                 },
             });
         }),
+
+    searchByRutStrict: publicProcedure
+        .input(z.object({
+            rut: z.string()
+        }))
+        .query(async ({ ctx, input }) => {
+            const { rut } = input;
+            const cleanedRut = rut.replace(/\./g, "").split('-')
+
+            return await ctx.prisma.padronData.findMany({
+                where: {
+                    RUN: cleanedRut[0]
+                }
+            });
+        }),
 });
