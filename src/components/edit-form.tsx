@@ -101,7 +101,7 @@ export const EditForm: FC<EditFormProps> = ({ setOpen }) => {
         } catch (error) {
             console.error("Error submitting form:", error);
         }
-        refetchContacts()
+        await refetchContacts()
     };
 
     const handleSearchClick = () => {

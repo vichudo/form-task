@@ -15,9 +15,7 @@ export const ContactsTable = () => {
     const limit = 10; // Number of contacts per page
     const [queryVariables, setQueryVariables] = useState({ search: '', page: 1, limit });
 
-    const { data, isLoading, refetch } = trpc.formRouter.retrieveContacts.useQuery(queryVariables, {
-        enabled: false, // Disable automatic query execution
-    });
+    const { data, isLoading, refetch } = trpc.formRouter.retrieveContacts.useQuery(queryVariables);
 
     const [idToDelete, setIdToDelete] = useState<string>();
     const [displayDeleteModal, setDisplayDeleteModal] = useState<boolean>(false);
