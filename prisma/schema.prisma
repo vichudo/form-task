@@ -105,6 +105,7 @@ model FormData {
     userId          String?
     padronDataId    String?
     padron          PadronData? @relation(fields: [padronDataId], references: [id])
+    createdAt       DateTime?   @default(now())
 
     @@map("formdata")
 }

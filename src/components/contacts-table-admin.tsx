@@ -1,6 +1,6 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent, type FC } from 'react';
 import { trpc } from '~/utils/api';
-import { UserIcon, PlusCircleIcon, DocumentArrowDownIcon } from '@heroicons/react/24/outline';
+import { UserIcon, PlusCircleIcon, DocumentArrowDownIcon, StarIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { WarningModal } from './warning-modal';
 import toast from 'react-hot-toast';
@@ -8,14 +8,17 @@ import { GenericModal } from './generic-modal';
 import { useAtom } from 'jotai';
 import { selectedContact } from './store';
 import { EditForm } from './edit-form';
+import 'dayjs/locale/es';
+import dayjs from 'dayjs';
+dayjs.locale('es');
 
-export const ContactsTable = () => {
+export const ContactsTableAdmin: FC = () => {
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const limit = 10; // Number of contacts per page
     const [queryVariables, setQueryVariables] = useState({ search: '', page: 1, limit });
 
-    const { data, isLoading, refetch } = trpc.formRouter.retrieveContacts.useQuery(queryVariables, {
+    const { data, isLoading, refetch } = trpc.formRouter.retrieveContactsByAdmin.useQuery(queryVariables, {
         enabled: false, // Disable automatic query execution
     });
 
@@ -103,12 +106,15 @@ export const ContactsTable = () => {
                 }}
                 confirmAction={handleDeletion}
             />
-            <div className="py-8 bg-white sm:py-12 lg:py-16">
+            <div className='flex justify-center mt-4'>
+                <div className='text-emerald-50 bg-gray-600 w-fit text-center rounded-md px-2 py-1 text-sm shadow-md shadow-gray-300 font-bold'>⭐️ Vista Admin</div>
+            </div>
+            <div className="py-8 bg-white sm:py-12 lg:py-12">
                 <div className="px-4 mx-2 max-w-full sm:px-6 lg:px-8">
                     <div className="flex flex-col items-center justify-between sm:flex-row">
                         <div>
-                            <p className="text-xl font-bold text-gray-900 sm:text-2xl">Contactos</p>
-                            <p className="mt-2 text-sm font-medium text-gray-600 sm:text-base">Todos los contactos que has registrado.</p>
+                            <p className="text-xl font-bold text-gray-900 sm:text-2xl">Todos los Contactos</p>
+                            <p className="mt-2 text-sm font-medium text-gray-600 sm:text-base">Todos los contactos que se han registrado por todos los usuarios.</p>
                         </div>
 
                         <div className="flex flex-col items-center mt-4 space-y-4 sm:mt-0 sm:flex-row sm:space-y-0 sm:space-x-4">
@@ -164,19 +170,23 @@ export const ContactsTable = () => {
                                         <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">Dirección</th>
                                         <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">Comuna</th>
                                         <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">Región</th>
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">Registrado por</th>
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">Creado en</th>
                                         <th className="relative px-6 py-3 whitespace-nowrap">
                                             <span className="sr-only">Actions</span>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                    {data?.contacts.map((contact) => (
+                                    {data?.contacts?.map((contact) => (
                                         <tr key={contact.id}>
                                             <td className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">{contact.nombre_completo}</td>
                                             <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{contact.rut}</td>
                                             <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{contact.direccion}</td>
                                             <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{contact.comuna}</td>
                                             <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{contact.region}</td>
+                                            <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{contact.user?.email}</td>
+                                            <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{dayjs(contact.createdAt).format('DD/MM/YYYY')}</td>
                                             <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                                 <button onClick={() => handleEditModal(contact)} className="text-indigo-600 hover:text-indigo-900">
                                                     Editar
@@ -203,7 +213,7 @@ export const ContactsTable = () => {
                                 </div>
                             </div>
                         ) : (
-                            data?.contacts.map((contact) => (
+                            data?.contacts?.map((contact) => (
                                 <div key={contact.id} className="bg-white shadow-lg rounded-lg">
                                     <div className="px-4 py-5 sm:px-6">
                                         <div className="flex items-center">
@@ -232,6 +242,14 @@ export const ContactsTable = () => {
                                             <div className="sm:col-span-1">
                                                 <dt className="text-sm font-medium text-gray-500">Región</dt>
                                                 <dd className="mt-1 text-sm text-gray-900">{contact.region}</dd>
+                                            </div>
+                                            <div className="sm:col-span-1">
+                                                <dt className="text-sm font-medium text-gray-500">Registrado por</dt>
+                                                <dd className="mt-1 text-sm text-gray-900">{contact.user?.email}</dd>
+                                            </div>
+                                            <div className="sm:col-span-1">
+                                                <dt className="text-sm font-medium text-gray-500">Creado en</dt>
+                                                <dd className="mt-1 text-sm text-gray-900">{dayjs(contact.createdAt).format('DD/MM/YYYY')}</dd>
                                             </div>
                                         </dl>
                                     </div>

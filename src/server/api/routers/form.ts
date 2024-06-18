@@ -1,6 +1,7 @@
 import { z } from "zod";
 import ExcelJS from 'exceljs';
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { TRPCError } from "@trpc/server";
 
 export const formRouter = createTRPCRouter({
     submitForm: publicProcedure
@@ -99,6 +100,47 @@ export const formRouter = createTRPCRouter({
                 where: whereClause as any,
                 skip: (page - 1) * limit,
                 take: limit,
+            });
+
+            const totalContacts = await ctx.prisma.formData.count({
+                where: whereClause as any,
+            });
+
+            return { contacts, totalContacts };
+        }),
+    retrieveContactsByAdmin: protectedProcedure
+        .input(z.object({
+            search: z.string().optional(),
+            page: z.number().optional(),
+            limit: z.number().optional(),
+        }))
+        .query(async ({ ctx, input }) => {
+            const { search, page = 1, limit = 10 } = input;
+            const authorizedUsers = ['adominguezvallejos@gmail.com', 'vichudo@gmail.com']
+
+            if (!authorizedUsers.includes(String(ctx.session.user.email))) return {}
+
+            const whereClause = {
+                OR: search ? [
+                    { nombre_completo: { contains: search, mode: 'insensitive' } },
+                    { rut: { contains: search, mode: 'insensitive' } },
+                    { direccion: { contains: search, mode: 'insensitive' } },
+                    { comuna: { contains: search, mode: 'insensitive' } },
+                    { region: { contains: search, mode: 'insensitive' } },
+                ] : undefined,
+            };
+
+            const contacts = await ctx.prisma.formData.findMany({
+                where: whereClause as any,
+                skip: (page - 1) * limit,
+                take: limit,
+                include: {
+                    user: {
+                        select: {
+                            email: true
+                        }
+                    }
+                }
             });
 
             const totalContacts = await ctx.prisma.formData.count({
