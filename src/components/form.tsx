@@ -3,23 +3,37 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useForm, Controller, FieldValues } from "react-hook-form";
 import toast from "react-hot-toast";
-import Select, { SingleValue } from "react-select";
+import Select, { SingleValue, GroupBase, StylesConfig } from "react-select";
 import { trpc } from "~/utils/api";
 import { RouterInputs } from "~/utils/api";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useRutFormatter } from "~/hooks/useFormatRut";
+import { tags } from "~/utils/tags";
 
 type FormData = RouterInputs['formRouter']['submitForm'];
 
 type SelectOption = {
-    value: number;
+    value: string;
     label: string;
 };
 
-const phonePrefixOptions = [
+const phonePrefixOptions: SelectOption[] = [
     { value: '+52', label: '+52' },
     { value: '+56', label: '+56' },
 ];
+
+const tagOptions: SelectOption[] = tags.map(tag => ({ value: tag.value, label: tag.name }));
+
+const customStyles: StylesConfig<SelectOption, false> = {
+    menu: (provided) => ({
+        ...provided,
+        zIndex: 9999,
+    }),
+    menuPortal: (base) => ({
+        ...base,
+        zIndex: 9999,
+    }),
+};
 
 export const Form = () => {
     const { register, control, setValue, handleSubmit, reset, watch } = useForm<FormData>({
@@ -46,7 +60,7 @@ export const Form = () => {
 
     const [selectedRut, setSelectedRut] = useState<string>("");
     const [selectedOption, setSelectedOption] = useState<SelectOption | null>(null);
-    const [phonePrefix, setPhonePrefix] = useState(phonePrefixOptions[1]);
+    const [phonePrefix, setPhonePrefix] = useState<SelectOption | null | undefined>(phonePrefixOptions[1]);
     const [phoneError, setPhoneError] = useState<string>("");
     const rut = watch("rut");
     const formattedRut = useRutFormatter(String(rut));
@@ -63,7 +77,7 @@ export const Form = () => {
     useEffect(() => {
         if (padronData && padronData.length > 0) {
             const firstOption = {
-                value: 0,
+                value: '0',
                 label: `${padronData[0]?.NOMBRES ?? ''} ${padronData[0]?.APELLIDO_PATERNO ?? ''} ${padronData[0]?.APELLIDO_MATERNO ?? ''}`
             };
             setSelectedOption(firstOption);
@@ -92,7 +106,7 @@ export const Form = () => {
     const handlePadronDataSelect = (selectedOption: SingleValue<SelectOption> | null) => {
         setSelectedOption(selectedOption);
         if (!selectedOption) return;
-        const data = padronData ? padronData[selectedOption.value] : null;
+        const data = padronData ? padronData[parseInt(selectedOption.value)] : null;
         if (data) {
             setValue("rut", `${data.RUN}-${data.DV}`);
             setValue("nombre_completo", `${data.NOMBRES ?? ''} ${data.APELLIDO_PATERNO ?? ''} ${data.APELLIDO_MATERNO ?? ''}`);
@@ -135,6 +149,8 @@ export const Form = () => {
             setPhoneError("");
         }
     };
+
+    const isBrowser = typeof window !== 'undefined';
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
@@ -199,12 +215,14 @@ export const Form = () => {
                                     <Select
                                         {...field}
                                         options={padronData.map((data, index) => ({
-                                            value: index,
+                                            value: index.toString(),
                                             label: `${data.NOMBRES ?? ''} ${data.APELLIDO_PATERNO ?? ''} ${data.APELLIDO_MATERNO ?? ''}`,
                                         }))}
                                         value={selectedOption}
                                         onChange={(option) => handlePadronDataSelect(option as SingleValue<SelectOption> | null)}
-                                        className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        styles={customStyles}
+                                        className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-xs sm:leading-6"
+                                        menuPortalTarget={isBrowser ? document.body : null}
                                     />
                                 )}
                             />
@@ -217,16 +235,16 @@ export const Form = () => {
                         <div className="border rounded p-4 mt-4 bg-gray-100 shadow-sm">
                             <h3 className="font-bold mb-2 text-lg text-indigo-700">Datos Electorales</h3>
                             <div className="space-y-1">
-                                <p><strong className="text-gray-700">RUT:</strong> {`${padronData[selectedOption.value]?.RUN ?? ''}-${padronData[selectedOption.value]?.DV ?? ''}`}</p>
-                                <p><strong className="text-gray-700">Nombre Completo:</strong> {`${padronData[selectedOption.value]?.NOMBRES ?? ''} ${padronData[selectedOption.value]?.APELLIDO_PATERNO ?? ''} ${padronData[selectedOption.value]?.APELLIDO_MATERNO ?? ''}`}</p>
-                                <p><strong className="text-gray-700">Dirección:</strong> {`${padronData[selectedOption.value]?.CALLE ?? ''} ${padronData[selectedOption.value]?.NUMERO ?? ''} ${padronData[selectedOption.value]?.LETRA ?? ''} ${padronData[selectedOption.value]?.RESTO_DOMICILIO ?? ''}`}</p>
-                                <p><strong className="text-gray-700">Comuna:</strong> {padronData[selectedOption.value]?.GLOSACOMUNA ?? ''}</p>
-                                <p><strong className="text-gray-700">Región:</strong> {padronData[selectedOption.value]?.GLOSAREGION ?? ''}</p>
-                                <p><strong className="text-gray-700">Provincia:</strong> {padronData[selectedOption.value]?.GLOSAPROVINCIA ?? ''}</p>
-                                <p><strong className="text-gray-700">Circunscripción:</strong> {padronData[selectedOption.value]?.GLOSACIRCUNSCRIPCION ?? ''}</p>
-                                <p><strong className="text-gray-700">País:</strong> {padronData[selectedOption.value]?.GLOSAPAIS ?? ''}</p>
-                                <p><strong className="text-gray-700">Mesa:</strong> {padronData[selectedOption.value]?.MESA ?? ''}</p>
-                                <p><strong className="text-gray-700">Sexo:</strong> {padronData[selectedOption.value]?.SEXO === '0' ? 'Femenino' : 'Masculino' ?? ''}</p>
+                                <p><strong className="text-gray-700">RUT:</strong> {`${padronData[parseInt(selectedOption.value)]?.RUN ?? ''}-${padronData[parseInt(selectedOption.value)]?.DV ?? ''}`}</p>
+                                <p><strong className="text-gray-700">Nombre Completo:</strong> {`${padronData[parseInt(selectedOption.value)]?.NOMBRES ?? ''} ${padronData[parseInt(selectedOption.value)]?.APELLIDO_PATERNO ?? ''} ${padronData[parseInt(selectedOption.value)]?.APELLIDO_MATERNO ?? ''}`}</p>
+                                <p><strong className="text-gray-700">Dirección:</strong> {`${padronData[parseInt(selectedOption.value)]?.CALLE ?? ''} ${padronData[parseInt(selectedOption.value)]?.NUMERO ?? ''} ${padronData[parseInt(selectedOption.value)]?.LETRA ?? ''} ${padronData[parseInt(selectedOption.value)]?.RESTO_DOMICILIO ?? ''}`}</p>
+                                <p><strong className="text-gray-700">Comuna:</strong> {padronData[parseInt(selectedOption.value)]?.GLOSACOMUNA ?? ''}</p>
+                                <p><strong className="text-gray-700">Región:</strong> {padronData[parseInt(selectedOption.value)]?.GLOSAREGION ?? ''}</p>
+                                <p><strong className="text-gray-700">Provincia:</strong> {padronData[parseInt(selectedOption.value)]?.GLOSAPROVINCIA ?? ''}</p>
+                                <p><strong className="text-gray-700">Circunscripción:</strong> {padronData[parseInt(selectedOption.value)]?.GLOSACIRCUNSCRIPCION ?? ''}</p>
+                                <p><strong className="text-gray-700">País:</strong> {padronData[parseInt(selectedOption.value)]?.GLOSAPAIS ?? ''}</p>
+                                <p><strong className="text-gray-700">Mesa:</strong> {padronData[parseInt(selectedOption.value)]?.MESA ?? ''}</p>
+                                <p><strong className="text-gray-700">Sexo:</strong> {padronData[parseInt(selectedOption.value)]?.SEXO === '0' ? 'Femenino' : 'Masculino' ?? ''}</p>
                             </div>
                         </div>
                     )}
@@ -265,29 +283,33 @@ export const Form = () => {
                 <div className="border-t border-gray-200 pt-6">
                     <label className="block text-lg font-medium leading-6 text-gray-900">Teléfono</label>
                     <div className="mt-2 flex items-center space-x-2">
-                        <Select
-                            options={phonePrefixOptions}
-                            value={phonePrefix}
-                            onChange={(option) => setPhonePrefix(option as any)}
-                            className="w-24 text-xs"
-                        />
                         <Controller
                             name="telefono"
                             control={control}
                             rules={{ pattern: /^\d{9}$/ }}
-                            render={({ field: { onChange, ...field } }) => (
-                                <input
-                                    type="tel"
-                                    id="telefono"
-                                    placeholder="912345678"
-                                    {...field}
-                                    onChange={(e) => {
-                                        handlePhoneChange(e.target.value);
-                                        onChange(e);
-                                    }}
-                                    onBlur={(e) => validatePhone(e.target.value)}
-                                    className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
+                            render={({ field }) => (
+                                <>
+                                    <Select
+                                        value={phonePrefix}
+                                        onChange={(option) => setPhonePrefix(option as SelectOption)}
+                                        options={phonePrefixOptions}
+                                        styles={customStyles}
+                                        className="w-32 text-sm"
+                                        menuPortalTarget={isBrowser ? document.body : null}
+                                    />
+                                    <input
+                                        type="tel"
+                                        id="telefono"
+                                        placeholder="912345678"
+                                        {...field}
+                                        onChange={(e) => {
+                                            handlePhoneChange(e.target.value);
+                                            field.onChange(e);
+                                        }}
+                                        onBlur={(e) => validatePhone(e.target.value)}
+                                        className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    />
+                                </>
                             )}
                         />
                     </div>
@@ -340,12 +362,14 @@ export const Form = () => {
                                         name={fieldName as keyof FormData}
                                         control={control}
                                         render={({ field }) => (
-                                            <input
-                                                type="text"
-                                                id={field.name}
-                                                placeholder={`Etiqueta ${field.name.split('_')[1]}`}
+                                            <Select
                                                 {...field}
-                                                className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                placeholder="Selecciona etiqueta"
+                                                value={tagOptions.find(option => option.label === field.value)}
+                                                onChange={(option) => field.onChange(option ? option.label : "")}
+                                                options={tagOptions}
+                                                styles={customStyles}
+                                                menuPortalTarget={isBrowser ? document.body : null}
                                             />
                                         )}
                                     />
