@@ -1,4 +1,4 @@
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import fs from 'fs';
 import path from 'path';
 import csv from 'csv-parser';
@@ -59,6 +59,12 @@ export const dummyRouter = createTRPCRouter({
                 .on('error', (error) => {
                     reject(error);
                 });
+        });
+    }),
+    getDistinctCommunes: protectedProcedure.query(async ({ ctx }) => {
+        return await ctx.prisma.padronData.groupBy({
+            // by: ['GLOSACOMUNA'],
+            by: ['GLOSAREGION'],
         });
     })
 });
