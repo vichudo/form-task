@@ -11,6 +11,8 @@ import { selectedContact } from "./store";
 import { useRutFormatter } from "~/hooks/useFormatRut";
 import { ClipboardIcon } from "@heroicons/react/24/outline";
 import { tags } from "~/utils/tags";
+import { communes } from "~/utils/communes";
+import { regions } from "~/utils/regions";
 
 type FormData = RouterInputs['formRouter']['submitForm'];
 
@@ -35,6 +37,9 @@ const customStyles: StylesConfig<SelectOption, false> = {
         zIndex: 9999,
     }),
 };
+
+const communeOptions: SelectOption[] = communes.map(commune => ({ value: commune, label: commune }));
+const regionOptions: SelectOption[] = regions.map(region => ({ value: region, label: region }));
 
 export const EditForm: FC<EditFormProps> = ({ setOpen }) => {
     const { register, control, setValue, handleSubmit, reset, watch } = useForm<FormData>({
@@ -272,14 +277,44 @@ export const EditForm: FC<EditFormProps> = ({ setOpen }) => {
                             <Controller
                                 name={field as keyof FormData}
                                 control={control}
-                                render={({ field }) => (
-                                    <input
-                                        type={field.name === "mail" ? "email" : field.name === "telefono" ? "tel" : "text"}
-                                        id={field.name}
-                                        {...field}
-                                        className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    />
-                                )}
+                                render={({ field }) => {
+                                    if (field.name === "comuna") {
+                                        return (
+                                            <Select
+                                                {...field}
+                                                options={communeOptions}
+                                                value={communeOptions.find(option => option.value === field.value)}
+                                                onChange={(option) => field.onChange(option ? option.value : "")}
+                                                placeholder="Selecciona una comuna"
+                                                styles={customStyles}
+                                                className="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                menuPortalTarget={isBrowser ? document.body : null}
+                                            />
+                                        );
+                                    } else if (field.name === "region") {
+                                        return (
+                                            <Select
+                                                {...field}
+                                                options={regionOptions}
+                                                value={regionOptions.find(option => option.value === field.value)}
+                                                onChange={(option) => field.onChange(option ? option.value : "")}
+                                                placeholder="Selecciona una región"
+                                                styles={customStyles}
+                                                className="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                menuPortalTarget={isBrowser ? document.body : null}
+                                            />
+                                        );
+                                    } else {
+                                        return (
+                                            <input
+                                                type={field.name === "mail" ? "email" : field.name === "telefono" ? "tel" : "text"}
+                                                id={field.name}
+                                                {...field}
+                                                className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            />
+                                        );
+                                    }
+                                }}
                             />
                         </div>
                     </div>

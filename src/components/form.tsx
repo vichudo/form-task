@@ -9,6 +9,8 @@ import { RouterInputs } from "~/utils/api";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useRutFormatter } from "~/hooks/useFormatRut";
 import { tags } from "~/utils/tags";
+import { communes } from "~/utils/communes";
+import { regions } from "~/utils/regions";
 
 type FormData = RouterInputs['formRouter']['submitForm'];
 
@@ -23,6 +25,10 @@ const phonePrefixOptions: SelectOption[] = [
 ];
 
 const tagOptions: SelectOption[] = tags.map(tag => ({ value: tag.value, label: tag.name }));
+
+const communeOptions: SelectOption[] = communes.map(commune => ({ value: commune, label: commune }));
+
+const regionOptions: SelectOption[] = regions.map(region => ({ value: region, label: region }));
 
 const customStyles: StylesConfig<SelectOption, false> = {
     menu: (provided) => ({
@@ -259,22 +265,50 @@ export const Form = () => {
                             <Controller
                                 name={fieldName as keyof FormData}
                                 control={control}
-                                render={({ field }) => (
-                                    <input
-                                        type={field.name === "mail" ? "email" : "text"}
-                                        id={field.name}
-                                        placeholder={
-                                            field.name === "nombre_completo" ? "Juan Pérez" :
-                                                field.name === "direccion" ? "Av. Siempre Viva 742" :
-                                                    field.name === "comuna" ? "Providencia" :
-                                                        field.name === "region" ? "Región Metropolitana" :
+                                render={({ field }) => {
+                                    if (fieldName === "comuna") {
+                                        return (
+                                            <Select
+                                                {...field}
+                                                options={communeOptions}
+                                                value={communeOptions.find(option => option.value === field.value)}
+                                                onChange={(option) => field.onChange(option ? option.value : "")}
+                                                placeholder="Selecciona una comuna"
+                                                styles={customStyles}
+                                                className="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                menuPortalTarget={isBrowser ? document.body : null}
+                                            />
+                                        );
+                                    } else if (fieldName === "region") {
+                                        return (
+                                            <Select
+                                                {...field}
+                                                options={regionOptions}
+                                                value={regionOptions.find(option => option.value === field.value)}
+                                                onChange={(option) => field.onChange(option ? option.value : "")}
+                                                placeholder="Selecciona una región"
+                                                styles={customStyles}
+                                                className="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                menuPortalTarget={isBrowser ? document.body : null}
+                                            />
+                                        );
+                                    } else {
+                                        return (
+                                            <input
+                                                type={field.name === "mail" ? "email" : "text"}
+                                                id={field.name}
+                                                placeholder={
+                                                    field.name === "nombre_completo" ? "Juan Pérez" :
+                                                        field.name === "direccion" ? "Av. Siempre Viva 742" :
                                                             field.name === "nacionalidad" ? "Chilena" :
                                                                 field.name === "mail" ? "juan.perez@example.com" : ""
-                                        }
-                                        {...field}
-                                        className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    />
-                                )}
+                                                }
+                                                {...field}
+                                                className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            />
+                                        );
+                                    }
+                                }}
                             />
                         </div>
                     </div>
