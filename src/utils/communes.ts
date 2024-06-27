@@ -65,6 +65,7 @@ export const communes: Array<string> = [
     "COQUIMBO",
     "CORONEL",
     "CORRAL",
+    "COYHAIQUE",
     "CUREPTO",
     "CURACAUTIN",
     "CURACO DE VELEZ",
