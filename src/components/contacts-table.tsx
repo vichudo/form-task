@@ -159,6 +159,7 @@ export const ContactsTable = () => {
                                     <tr>
                                         <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">Nombre Completo</th>
                                         <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">RUT</th>
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">Teléfono</th>
                                         <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">Dirección</th>
                                         <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">Comuna</th>
                                         <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">Región</th>
@@ -172,6 +173,7 @@ export const ContactsTable = () => {
                                         <tr key={contact.id}>
                                             <td className="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">{contact.nombre_completo}</td>
                                             <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{contact.rut}</td>
+                                            <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{contact.telefono}</td>
                                             <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{contact.direccion}</td>
                                             <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{contact.comuna}</td>
                                             <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{contact.region}</td>
@@ -218,6 +220,10 @@ export const ContactsTable = () => {
                                             <div className="sm:col-span-1">
                                                 <dt className="text-sm font-medium text-gray-500">RUT</dt>
                                                 <dd className="mt-1 text-sm text-gray-900">{contact.rut}</dd>
+                                            </div>
+                                            <div className="sm:col-span-1">
+                                                <dt className="text-sm font-medium text-gray-500">Teléfono</dt>
+                                                <dd className="mt-1 text-sm text-gray-900">{contact.telefono}</dd>
                                             </div>
                                             <div className="sm:col-span-1">
                                                 <dt className="text-sm font-medium text-gray-500">Dirección</dt>
