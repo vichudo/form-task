@@ -6,6 +6,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
+import Image from 'next/image'
+import socialTazkLogo from '../../public/socialTazkLogo.jpeg'
 
 
 const navigation = [
@@ -41,6 +43,9 @@ export const Navbar: FC = () => {
                                     <span className="sr-only">Abrir menú</span>
                                     <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                                 </Popover.Button>
+                            </div>
+                            <div className='flex justify-center ml-5'>
+                                <Image className='p-2 bg-white rounded-sm' alt="logo" width={100} height={100} src={socialTazkLogo} />
                             </div>
                         </div>
                         <div className="hidden space-x-8 md:ml-10 md:flex">
