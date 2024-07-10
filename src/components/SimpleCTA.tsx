@@ -3,7 +3,8 @@ import { XCircleIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React, { type FC } from 'react';
-
+import Image from 'next/image';
+import socialTazkLogo from '../../public/socialTazkLogo.jpeg'
 export const SimpleCTA: FC = () => {
     const { status } = useSession()
     return (
@@ -23,7 +24,9 @@ export const SimpleCTA: FC = () => {
                             <img className="object-cover w-full h-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/cta/2/female-avatar-2.jpg" alt="" />
                         </div>
                     </div>
-
+                    <div className='flex justify-center'>
+                        <Image alt="logo" width={400} height={400} src={socialTazkLogo} />
+                    </div>
                     <h2 className="mt-8 text-3xl font-bold leading-tight text-black lg:mt-12 sm:text-4xl lg:text-5xl">Registra tus contactos</h2>
                     <p className="max-w-xl mx-auto mt-6 text-xl text-gray-600 md:mt-10">Ingresa y gestiona tus contactos rápidamente</p>
 
