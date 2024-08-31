@@ -13,6 +13,7 @@ import socialTazkLogo from '../../public/socialTazkLogo.jpeg'
 const navigation = [
     { name: 'Contactos', href: '/app' },
     { name: 'Formulario', href: '/form' },
+    { name: 'SMS', href: '/sms' },
 ]
 
 export const Navbar: FC = () => {
