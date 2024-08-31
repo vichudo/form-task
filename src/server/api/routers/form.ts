@@ -2,6 +2,7 @@ import { z } from "zod";
 import ExcelJS from 'exceljs';
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { TRPCError } from "@trpc/server";
+import dayjs from "dayjs";
 
 export const formRouter = createTRPCRouter({
     submitForm: publicProcedure
@@ -211,5 +212,161 @@ export const formRouter = createTRPCRouter({
                     id: input.id
                 }
             })
-        })
+        }),
+    retrieveContactsByAdminWithUserFilter: protectedProcedure
+        .input(z.object({
+            search: z.string().optional(),
+            page: z.number().optional(),
+            limit: z.number().optional(),
+            userId: z.string().optional(),
+        }))
+        .query(async ({ ctx, input }) => {
+            const { search, page = 1, limit = 10, userId } = input;
+            const authorizedUsers = ['adominguezvallejos@gmail.com', 'vichudo@gmail.com']
+
+            if (!authorizedUsers.includes(String(ctx.session.user.email))) return {}
+
+            const whereClause = {
+                OR: search ? [
+                    { nombre_completo: { contains: search, mode: 'insensitive' } },
+                    { rut: { contains: search, mode: 'insensitive' } },
+                    { direccion: { contains: search, mode: 'insensitive' } },
+                    { comuna: { contains: search, mode: 'insensitive' } },
+                    { region: { contains: search, mode: 'insensitive' } },
+                ] : undefined,
+                userId: userId ? userId : undefined,
+            };
+
+            const contacts = await ctx.prisma.formData.findMany({
+                where: whereClause as any,
+                skip: (page - 1) * limit,
+                take: limit,
+                include: {
+                    user: {
+                        select: {
+                            email: true
+                        }
+                    }
+                }
+            });
+
+            const totalContacts = await ctx.prisma.formData.count({
+                where: whereClause as any,
+            });
+
+            return { contacts, totalContacts };
+        }),
+
+    retrieveAllContactsForUser: protectedProcedure
+        .input(z.object({
+            userId: z.string(),
+            search: z.string().optional(),
+        }))
+        .query(async ({ ctx, input }) => {
+            const { userId, search } = input;
+            const authorizedUsers = ['adominguezvallejos@gmail.com', 'vichudo@gmail.com']
+
+            if (!authorizedUsers.includes(String(ctx.session.user.email))) return {}
+
+            const whereClause = {
+                userId: userId,
+                OR: search ? [
+                    { nombre_completo: { contains: search, mode: 'insensitive' } },
+                    { rut: { contains: search, mode: 'insensitive' } },
+                    { direccion: { contains: search, mode: 'insensitive' } },
+                    { comuna: { contains: search, mode: 'insensitive' } },
+                    { region: { contains: search, mode: 'insensitive' } },
+                ] : undefined,
+            };
+
+            const contacts = await ctx.prisma.formData.findMany({
+                where: whereClause as any,
+                include: {
+                    user: {
+                        select: {
+                            email: true
+                        }
+                    }
+                }
+            });
+
+            return { contacts, totalContacts: contacts.length };
+        }),
+    getAllUsers: protectedProcedure
+        .query(async ({ ctx }) => {
+            const authorizedUsers = ['adominguezvallejos@gmail.com', 'vichudo@gmail.com']
+
+            if (!authorizedUsers.includes(String(ctx.session.user.email))) return []
+
+            const users = await ctx.prisma.user.findMany({
+                select: {
+                    id: true,
+                    email: true,
+                },
+            });
+
+            return users;
+        }),
+    exportSelectedContactsToExcel: protectedProcedure
+        .input(z.object({
+            selectedIds: z.array(z.string()),
+        }))
+        .mutation(async ({ ctx, input }) => {
+            const { selectedIds } = input;
+
+            const contacts = await ctx.prisma.formData.findMany({
+                where: {
+                    id: { in: selectedIds },
+                },
+                include: {
+                    user: {
+                        select: {
+                            email: true,
+                        },
+                    },
+                },
+            });
+
+            const workbook = new ExcelJS.Workbook();
+            const worksheet = workbook.addWorksheet('Contactos');
+
+            worksheet.columns = [
+                { header: 'Nombre Completo', key: 'nombre_completo', width: 30 },
+                { header: 'RUT', key: 'rut', width: 20 },
+                { header: 'Teléfono', key: 'telefono', width: 20 },
+                { header: 'Dirección', key: 'direccion', width: 30 },
+                { header: 'Comuna', key: 'comuna', width: 20 },
+                { header: 'Región', key: 'region', width: 20 },
+                { header: 'Registrado por', key: 'registrado_por', width: 30 },
+                { header: 'Creado en', key: 'creado_en', width: 20 },
+            ];
+
+            contacts.forEach(contact => {
+                worksheet.addRow({
+                    nombre_completo: contact.nombre_completo,
+                    rut: contact.rut,
+                    telefono: contact.telefono,
+                    direccion: contact.direccion,
+                    comuna: contact.comuna,
+                    region: contact.region,
+                    registrado_por: contact.user?.email,
+                    creado_en: contact.createdAt ? dayjs(contact.createdAt).format('DD/MM/YYYY') : '',
+                });
+            });
+
+            const buffer = await workbook.xlsx.writeBuffer();
+            const base64String = Buffer.from(buffer).toString('base64');
+            return { base64String };
+        }),
+    getUserContactCount: protectedProcedure
+        .input(z.object({
+            userId: z.string(),
+        }))
+        .query(async ({ ctx, input }) => {
+            const { userId } = input;
+            const count = await ctx.prisma.formData.count({
+                where: { userId: userId },
+            });
+            return count;
+        }),
 });
