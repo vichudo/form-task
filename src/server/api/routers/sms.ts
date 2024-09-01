@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { TRPCError } from "@trpc/server";
+import ExcelJS from 'exceljs';
 
 export const smsRouter = createTRPCRouter({
     getTotalContacts: protectedProcedure.query(async ({ ctx }) => {
@@ -96,4 +97,74 @@ export const smsRouter = createTRPCRouter({
                 });
             }
         }),
+    retrieveRequestsFromAdmin: protectedProcedure.query(async ({ ctx }) => {
+        return await ctx.prisma.smsRequests.findMany({
+            where: {
+                status: 'pending'
+            },
+            orderBy: {
+                createdAt: 'desc'
+            }
+        })
+    }),
+    updateRequestStatus: protectedProcedure
+        .input(z.object({
+            requestId: z.string(),
+            status: z.enum(['completed', 'cancelled'])
+        }))
+        .mutation(async ({ ctx, input }) => {
+            // TODO: Add admin check here
+            return await ctx.prisma.smsRequests.update({
+                where: { id: input.requestId },
+                data: { status: input.status }
+            });
+        }),
+    getExcelFileForAdmin: protectedProcedure
+        .input(z.object({ requestId: z.string() }))
+        .mutation(async ({ ctx, input }) => {
+            const request = await ctx.prisma.smsRequests.findFirst({
+                where: {
+                    id: input.requestId
+                }
+            })
+            if (!request?.requestUserId) return;
+            const user = await ctx.prisma.user.findUnique({
+                where: {
+                    id: request.requestUserId
+                }
+            })
+
+            const contacts = await ctx.prisma.formData.findMany({
+                where: {
+                    userId: user?.id,
+                    telefono: {
+                        notIn: ['', 'null']
+                    }
+                }
+            });
+
+            const workbook = new ExcelJS.Workbook();
+            const worksheet = workbook.addWorksheet('Contacts');
+
+            worksheet.columns = [
+                { header: 'Nombre Completo', key: 'nombre_completo', width: 30 },
+                { header: 'Mensaje', key: 'mensaje', width: 30 },
+                { header: 'Teléfono', key: 'telefono', width: 20 },
+            ];
+
+            contacts.forEach(contact => {
+                worksheet.addRow({
+
+                    nombre_completo: contact.nombre_completo,
+                    mensaje: request.message,
+                    telefono: contact.telefono,
+
+                });
+            });
+
+            const buffer = await workbook.xlsx.writeBuffer();
+            const base64String = Buffer.from(buffer).toString('base64');
+            return { base64String };
+
+        })
 });

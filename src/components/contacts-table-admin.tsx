@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FormEvent, type FC } from 'react';
 import { trpc } from '~/utils/api';
-import { UserIcon, PlusCircleIcon, DocumentArrowDownIcon, StarIcon } from '@heroicons/react/24/outline';
+import { UserIcon, PlusCircleIcon, DocumentArrowDownIcon, ArrowUpRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { WarningModal } from './warning-modal';
 import toast from 'react-hot-toast';
@@ -106,8 +106,13 @@ export const ContactsTableAdmin: FC = () => {
                 }}
                 confirmAction={handleDeletion}
             />
-            <div className='flex justify-center mt-4'>
+            <div className='flex justify-center mt-4 gap-2'>
                 <div className='text-emerald-50 bg-gray-600 w-fit text-center rounded-md px-2 py-1 text-sm shadow-md shadow-gray-300 font-bold'>⭐️ Vista Admin</div>
+                <div className='text-emerald-50 w-fit text-center rounded-md px-2 py-1 text-sm shadow-md shadow-gray-300 font-bold flex bg-indigo-600'>
+                    <Link href={`/admin/sms`}>
+                        ⭐️ Ir a Panel de Solicitudes SMS
+                    </Link>
+                    <ArrowUpRightIcon className='w-4' /></div>
             </div>
             <div className="py-8 bg-white sm:py-12 lg:py-12">
                 <div className="px-4 mx-2 max-w-full sm:px-6 lg:px-8">
