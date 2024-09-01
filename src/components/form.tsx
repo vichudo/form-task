@@ -250,7 +250,7 @@ export const Form = () => {
                                 <p><strong className="text-gray-700">Circunscripción:</strong> {padronData[parseInt(selectedOption.value)]?.GLOSACIRCUNSCRIPCION ?? ''}</p>
                                 <p><strong className="text-gray-700">País:</strong> {padronData[parseInt(selectedOption.value)]?.GLOSAPAIS ?? ''}</p>
                                 <p><strong className="text-gray-700">Mesa:</strong> {padronData[parseInt(selectedOption.value)]?.MESA ?? ''}</p>
-                                <p><strong className="text-gray-700">Sexo:</strong> {padronData[parseInt(selectedOption.value)]?.SEXO === '0' ? 'Femenino' : 'Masculino' ?? ''}</p>
+                                <p><strong className="text-gray-700">Sexo:</strong> {padronData[parseInt(selectedOption.value)]?.SEXO === '0' ? 'Femenino' : 'Masculino'}</p>
                             </div>
                         </div>
                     )}
