@@ -120,7 +120,7 @@ export const SmsAdminView: FC = () => {
                         </table>
                     </div>
                 ) : (
-                    <p className="text-center text-gray-500">No pending SMS requests found.</p>
+                    <p className="text-center text-gray-500">Actualmente no hay ninguna solicitud de envío de SMS.</p>
                 )}
             </div>
         </div>
