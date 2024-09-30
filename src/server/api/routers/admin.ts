@@ -96,7 +96,7 @@ export const adminRouter = createTRPCRouter({
 
                     return { createCount, updateCount };
                 }, {
-                    maxWait: 15000, // 15 seconds
+                    maxWait: 60000, // 60 seconds
                     timeout: 60000, // 60 seconds
                 });
 
