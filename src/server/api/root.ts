@@ -5,6 +5,7 @@ import { searchRouter } from "./routers/search";
 import { formRouter } from "./routers/form";
 import { accountRouter } from "./routers/account";
 import { smsRouter } from "./routers/sms";
+import { adminRouter } from "./routers/admin";
 
 /**
  * This is the primary router for your server.
@@ -15,6 +16,7 @@ export const appRouter = createTRPCRouter({
   post: postRouter,
   search: searchRouter,
   account: accountRouter,
+  adminRouter,
   dummyRouter,
   formRouter,
   smsRouter
