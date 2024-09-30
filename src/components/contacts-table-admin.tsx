@@ -10,6 +10,8 @@ import { selectedContact } from './store';
 import { EditForm } from './edit-form';
 import 'dayjs/locale/es';
 import dayjs from 'dayjs';
+import { AdminNavigation } from './admin-navigation-buttons';
+
 dayjs.locale('es');
 
 export const ContactsTableAdmin: FC = () => {
@@ -106,14 +108,7 @@ export const ContactsTableAdmin: FC = () => {
                 }}
                 confirmAction={handleDeletion}
             />
-            <div className='flex justify-center mt-4 gap-2'>
-                <div className='text-emerald-50 bg-gray-600 w-fit text-center rounded-md px-2 py-1 text-sm shadow-md shadow-gray-300 font-bold'>⭐️ Vista Admin</div>
-                <div className='text-emerald-50 w-fit text-center rounded-md px-2 py-1 text-sm shadow-md shadow-gray-300 font-bold flex bg-indigo-600'>
-                    <Link href={`/admin/sms`}>
-                        ⭐️ Ir a Panel de Solicitudes SMS
-                    </Link>
-                    <ArrowUpRightIcon className='w-4' /></div>
-            </div>
+            <AdminNavigation />
             <div className="py-8 bg-white sm:py-12 lg:py-12">
                 <div className="px-4 mx-2 max-w-full sm:px-6 lg:px-8">
                     <div className="flex flex-col items-center justify-between sm:flex-row">
