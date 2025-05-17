@@ -116,7 +116,7 @@ export const formRouter = createTRPCRouter({
         }))
         .query(async ({ ctx, input }) => {
             const { search, page = 1, limit = 10 } = input;
-            const authorizedUsers = ['adominguezvallejos@gmail.com', 'vichudo@gmail.com']
+            const authorizedUsers = ['adominguezvallejos@gmail.com', 'vichudo@gmail.com', 'formtazk@gmail.com']
 
             if (!authorizedUsers.includes(String(ctx.session.user.email))) return {}
 
