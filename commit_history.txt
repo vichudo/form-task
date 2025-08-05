@@ -1,0 +1,1137 @@
+commit 0baf26c1cea2da5c650d901ebab0eb85ec402138
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sat May 17 14:38:20 2025 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sat May 17 14:38:20 2025 -0400
+
+    chore: update form.ts for admin acc
+
+commit 5cea3d870bd4920e054617b94d63ac4d75c8b0a4
+Merge: 133ff47 f923309
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sun Sep 29 22:16:53 2024 -0300
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sun Sep 29 22:16:53 2024 -0300
+
+    Merge pull request #31 from vichudo/feat/increase-wait-time
+    
+    feat: increase wait time for excel file
+
+commit f9233099f7513d131221fb3574502e2d6eb279d3
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Sep 29 22:15:53 2024 -0300
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Sep 29 22:15:53 2024 -0300
+
+    feat: use 60s as max waiting time
+
+commit aa3d9b3c67060078a682e4569cdb0084412e344f
+Merge: e01b2ff 133ff47
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sun Sep 29 21:54:18 2024 -0300
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sun Sep 29 21:54:18 2024 -0300
+
+    Merge pull request #30 from vichudo/dev
+    
+    chore: translate CW
+
+commit 133ff47b0d420c018766f1be2004c11bc3cadd9d
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Sep 29 21:53:48 2024 -0300
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Sep 29 21:53:48 2024 -0300
+
+    chore: translate CW
+
+commit e01b2ffb5fdee551043afaa5e3b7777ee7f63484
+Merge: 17f1b4d cbb02b5
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sun Sep 29 21:52:29 2024 -0300
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sun Sep 29 21:52:29 2024 -0300
+
+    Merge pull request #29 from vichudo/dev
+    
+    Release: Excel contact importer
+
+commit cbb02b556936bba84e0711fba49d6b01b6b1d7aa
+Merge: 2db7603 b9b71fb
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sun Sep 29 21:50:33 2024 -0300
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sun Sep 29 21:50:33 2024 -0300
+
+    Merge pull request #28 from vichudo/feat/favicon
+    
+    feat: add favicon
+
+commit b9b71fb6f1d803dfa2adce3c1b88d16c46817071
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Sep 29 21:49:37 2024 -0300
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Sep 29 21:49:37 2024 -0300
+
+    feat: add favicon
+
+commit 2db7603a5bf6b55a8c137667dbc033b514f9130d
+Merge: 17f1b4d 060e9fc
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sun Sep 29 21:45:14 2024 -0300
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sun Sep 29 21:45:14 2024 -0300
+
+    Merge pull request #27 from vichudo/feat/import-contacts-from-excel
+    
+    Feat/import contacts from excel
+
+commit 060e9fca879191510188dec0eabcbfa7692a3b07
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Sep 29 21:40:03 2024 -0300
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Sep 29 21:40:03 2024 -0300
+
+    feat: propagate admin navigation
+
+commit 0d249eacc5e0038861583723d14d7710be3eec13
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Sep 29 21:38:58 2024 -0300
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Sep 29 21:38:58 2024 -0300
+
+    feat: create import page
+
+commit 1b0258797b79352ca7c21166d7782af5c81a1af5
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Sep 29 21:38:33 2024 -0300
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Sep 29 21:38:33 2024 -0300
+
+    feat: create admin nav buttons
+
+commit 3654fee983391d1d19a97c2fbc6b221362fae8ad
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Sep 29 21:38:07 2024 -0300
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Sep 29 21:38:07 2024 -0300
+
+    feat: create admin router
+
+commit 16ba368a6734bf08dd16afe1c544b9245cbf6f29
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Sep 28 13:34:03 2024 -0300
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Sep 28 13:34:03 2024 -0300
+
+    feat: add dropzone dep
+
+commit 17f1b4db66120d6d694d451db839259a3888a459
+Merge: 86e9528 bfd773b
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 22:13:00 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sat Aug 31 22:13:00 2024 -0400
+
+    Merge pull request #26 from vichudo/dev
+    
+    Release: SMS
+
+commit bfd773b55dcaba06f8bb2113927aa9d87caba53f
+Merge: 25858db d4d86ac
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 22:09:50 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sat Aug 31 22:09:50 2024 -0400
+
+    Merge pull request #25 from vichudo/feat/admin-handle-sms-requests
+    
+    Feat: admin handle sms requests
+
+commit d4d86ac0bd2a997c5c47351cc4817ba836be52b7
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 22:07:44 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Aug 31 22:07:44 2024 -0400
+
+    create admin sms paghe
+
+commit 63797b033082fce05d665d80eef2cbf7a5bc20ac
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 22:07:38 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Aug 31 22:07:38 2024 -0400
+
+    feat: create contaact table admin
+
+commit e9394291ab31b67db5c663924a82bb50817916d4
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 22:07:05 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Aug 31 22:07:05 2024 -0400
+
+    feat: create sms component
+
+commit 38a77146ccebc348dcc82857d91fc3e0887ec811
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 22:04:36 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Aug 31 22:04:36 2024 -0400
+
+    feat: sms router
+
+commit 25858db8dfbce95ecf1e140774b13785ccccf0da
+Merge: 86e9528 6d72d7e
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 21:02:54 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sat Aug 31 21:02:54 2024 -0400
+
+    Merge pull request #24 from vichudo/feat/shopping-cart
+    
+    Feat: Shopping cart
+
+commit 6d72d7e669d9bf42cf849e93abd04ee855a2431e
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 17:10:51 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Aug 31 17:10:51 2024 -0400
+
+    feat: add sms page
+
+commit 0896031d580548c1232b4af77393880854d1fb11
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 17:10:34 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Aug 31 17:10:34 2024 -0400
+
+    fix: minor coalesce fix
+
+commit 4db6b354e2666097aaffe63323a398afd54e22a7
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 17:10:20 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Aug 31 17:10:20 2024 -0400
+
+    feat: create main component for SMS section
+
+commit 157ccb8b9f95ae515864c0199fdc41c46f36d75c
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 17:09:29 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Aug 31 17:09:29 2024 -0400
+
+    feat: add SMS to navbar
+
+commit b381d8ae32ecb00caeaed34d75766b742792b6a4
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 17:09:08 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Aug 31 17:09:08 2024 -0400
+
+    feat: include router in root
+
+commit 1721392374e09e23e35c4be83a75a0eb97fceb0f
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 17:08:19 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Aug 31 17:08:19 2024 -0400
+
+    feat: update schema to handle messages
+
+commit 395c85f4fb64550f0935d1c1b40900ce15b3aad0
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 17:07:55 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Aug 31 17:07:55 2024 -0400
+
+    feat: create core sms router
+
+commit fc74bb431a4287fe1773eb90e9f0b334bccb89e8
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Aug 31 17:06:18 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Aug 31 17:06:18 2024 -0400
+
+    feat: add lucide react for loaders
+
+commit 86e95289d38114e5795e635112f5463b9f81c59d
+Merge: 768a021 7852053
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Tue Jul 9 22:16:38 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Tue Jul 9 22:16:38 2024 -0400
+
+    Merge pull request #23 from vichudo/dev
+    
+    Relase: Add logo
+
+commit 7852053a0d20cd4c1ead070c55e5f70c4ad744cc
+Merge: 768a021 ef60727
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Tue Jul 9 22:13:40 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Tue Jul 9 22:13:40 2024 -0400
+
+    Merge pull request #22 from vichudo/feat/logo
+    
+    feat: Add logo
+
+commit ef6072758af56b0731aa8bee2580c6a34417713e
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Tue Jul 9 22:08:58 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Tue Jul 9 22:08:58 2024 -0400
+
+    add logo
+
+commit 768a021ca2a452af1a6811208d9a2ec3c814e55b
+Merge: 4affdbb 2dff9d8
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Thu Jul 4 20:41:26 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Thu Jul 4 20:41:26 2024 -0400
+
+    Merge pull request #21 from vichudo/dev
+    
+    Release: Telefono in Table
+
+commit 2dff9d816541d0e8fc7332475cfa6dbabef9f6df
+Merge: cef32e9 c29d40c
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Thu Jul 4 20:39:59 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Thu Jul 4 20:39:59 2024 -0400
+
+    Merge pull request #19 from vichudo/fix/display-number
+    
+    feat: Add telefono to main table
+
+commit c29d40c97a9b9c1531c71ea86c5b75a5e8c721dd
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jul 4 20:39:31 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jul 4 20:39:31 2024 -0400
+
+    add telefono to main table
+
+commit 4affdbbaa2057fad821eb156c65256a780ab2288
+Merge: 43ed89c cef32e9
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sun Jun 30 20:01:56 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sun Jun 30 20:01:56 2024 -0400
+
+    Merge pull request #18 from vichudo/dev
+    
+    update comunas
+
+commit cef32e9f85cb1750cbefe467f8bd947b2b0a8c34
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 30 20:00:52 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 30 20:00:52 2024 -0400
+
+    update comunas
+
+commit 43ed89c20b7489fec38afc69614096cfa57b3d75
+Merge: 93b868d cb04451
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 03:21:50 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Thu Jun 27 03:21:50 2024 -0400
+
+    Merge pull request #17 from vichudo/dev
+    
+    Release: Add coyhaique
+
+commit cb0445186d7e18c12d14a3ee2524b92ee5143ec2
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 03:21:10 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jun 27 03:21:10 2024 -0400
+
+    feat: add coyhaique
+
+commit 93b868d0543c6c1affdf08ad744a3ce1b34ccab7
+Merge: 73d7622 eee52b1
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 03:12:34 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Thu Jun 27 03:12:34 2024 -0400
+
+    Merge pull request #16 from vichudo/dev
+    
+    Release: Data region & commune validation
+
+commit eee52b1fc0e9de95cb88d927583325cc48edbd62
+Merge: 73d7622 83eb13f
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 03:11:21 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Thu Jun 27 03:11:21 2024 -0400
+
+    Merge pull request #15 from vichudo/feat/auto-parse-and-search-commune
+    
+    feat(Forms): Auto parse and search commune
+
+commit 83eb13f156583f83b80ef6b17b1338677d299ae7
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 03:09:13 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jun 27 03:09:13 2024 -0400
+
+    feat: update main forms to parse communes and regions
+
+commit bf22cb16ed225004f26cc21c38e7b9d5f1f30090
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 03:07:49 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jun 27 03:07:49 2024 -0400
+
+    feat: add commune & region consts
+
+commit c2eabbe1a150bafea95826d7386c74eb512c6ade
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 03:07:28 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jun 27 03:07:28 2024 -0400
+
+    feat: add dumy router to distingyuishibly retrieve distinct communes and regions
+
+commit 73d7622f8b9b025453d01ff13a1adb4c4fdac864
+Merge: d84ab15 547bacb
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 02:19:47 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Thu Jun 27 02:19:47 2024 -0400
+
+    Merge pull request #14 from vichudo/dev
+    
+    Release: reset password & recover
+
+commit 547bacb9589a11b51c315c93e3f822452e870f6d
+Merge: d84ab15 1630779
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 02:17:40 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Thu Jun 27 02:17:40 2024 -0400
+
+    Merge pull request #13 from vichudo/feat/password-recovery
+    
+    Feat(Login): Password recovery
+
+commit 1630779b377575edff27d3839bc7013ab74f9a2d
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 02:14:52 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jun 27 02:14:52 2024 -0400
+
+    update link to recover password from login
+
+commit 5f87bebfdf44092f967dcbf58d2d99200e066a13
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 02:14:04 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jun 27 02:14:04 2024 -0400
+
+    create both recover and reset routes
+
+commit 3cfc4b2e1009730504a4900e1594b7bafddeddff
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 02:13:49 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jun 27 02:13:49 2024 -0400
+
+    create reset component
+
+commit 978de5ff50e1b208e5331e3e40686f7e5b462a4f
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 02:13:43 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jun 27 02:13:43 2024 -0400
+
+    create revcovery component
+
+commit aedac92ae0342024860a2773f536a53c202d94fe
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 02:13:26 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jun 27 02:13:26 2024 -0400
+
+    create email helper based on SMTP
+
+commit 6bdc008644ebe3f695013ce97415c7a19b08cd99
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 02:12:19 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jun 27 02:12:19 2024 -0400
+
+    create account router
+
+commit 60970f88c9de77e21f00655576617cd8f235a721
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 02:08:54 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jun 27 02:08:54 2024 -0400
+
+    update schema to handle password token
+
+commit 0e537e750b3ee0ffc983ff84af9b68b8a970d6e0
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jun 27 02:08:28 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jun 27 02:08:28 2024 -0400
+
+    update dependencies
+
+commit d84ab154bbaeb4b1d2f3aaf15bfb19b34ba2c1eb
+Merge: 8700934 ae62b18
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Fri Jun 21 01:29:04 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Fri Jun 21 01:29:04 2024 -0400
+
+    Merge pull request #12 from vichudo/dev
+    
+    Release: tags
+
+commit ae62b18d3dfb34df67100386e707a7c558f696af
+Merge: 51a1474 4d2a4e0
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Fri Jun 21 01:27:46 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Fri Jun 21 01:27:46 2024 -0400
+
+    Merge pull request #11 from vichudo/feat/tags
+    
+    Feat: Selects on input for etiquetas
+
+commit 4d2a4e0005b002bd4e4f0fe4e30f2e1ead087074
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri Jun 21 01:19:42 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri Jun 21 01:19:42 2024 -0400
+
+    update tags to selects on edit form
+
+commit 64fa429dd66a872c8dc0dea7fdf1f0ac0550214f
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri Jun 21 01:19:29 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri Jun 21 01:19:29 2024 -0400
+
+    update tags to selects on main form
+
+commit bf3360c276234ac3e603653bea1779a6a27131a5
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri Jun 21 01:17:42 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri Jun 21 01:17:42 2024 -0400
+
+    add tags object
+
+commit 870093476e1f21facb2867cb886b056a9c77b4af
+Merge: 126bde3 51a1474
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Tue Jun 18 01:37:35 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Tue Jun 18 01:37:35 2024 -0400
+
+    Merge pull request #10 from vichudo/dev
+    
+    Release: Refetch
+
+commit 51a147477487def080428eaece84ae3b8314b46b
+Merge: 126bde3 924a2f3
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Tue Jun 18 01:36:20 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Tue Jun 18 01:36:20 2024 -0400
+
+    Merge pull request #9 from vichudo/feat/refetch-after-save
+    
+    Feat: Refetch after save
+
+commit 924a2f3e42f0f2bc012cb3b048763672c0ee82a3
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Tue Jun 18 01:34:22 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Tue Jun 18 01:34:22 2024 -0400
+
+    properly call refetch contacts
+
+commit 6cd7348318e8de21c0aeb3b9744f0ae2490b24bf
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Tue Jun 18 01:34:01 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Tue Jun 18 01:34:01 2024 -0400
+
+    correct refetch due to disabled query
+
+commit 126bde394d377ace2fc20d158108e6c31f02eb8a
+Merge: 73a8131 d0e5082
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Tue Jun 18 00:34:04 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Tue Jun 18 00:34:04 2024 -0400
+
+    Merge pull request #8 from vichudo/dev
+    
+    Release: Admin Panel
+
+commit d0e508281b88f3a3f67c85f3466a116a4ffa532a
+Merge: 333d3a9 3d7f1d8
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Tue Jun 18 00:32:06 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Tue Jun 18 00:32:06 2024 -0400
+
+    Merge pull request #7 from vichudo/feat/admin-panel-download
+    
+    Feat: Admin panel
+
+commit 3d7f1d8a5f594f5abf2edc2ac62f018e183f4159
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Tue Jun 18 00:29:00 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Tue Jun 18 00:29:00 2024 -0400
+
+    create table admin component
+
+commit 22b7c41fe39f53fe5814795c86fcb3bc9f5204d6
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Tue Jun 18 00:28:24 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Tue Jun 18 00:28:24 2024 -0400
+
+    create admin page
+
+commit 0d46b3b64d2aa1be4d176a36024642267cfe25d0
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Tue Jun 18 00:26:41 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Tue Jun 18 00:26:41 2024 -0400
+
+    remove unused import from Navbar
+
+commit d7071ede5454fa49c935b460bdddda6a9e6e91eb
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Tue Jun 18 00:26:24 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Tue Jun 18 00:26:24 2024 -0400
+
+    add total contacts number
+
+commit f4773020f9aaa7b555e49aee7f56be504cb7572f
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Tue Jun 18 00:23:04 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Tue Jun 18 00:23:04 2024 -0400
+
+    create retrieve by admin router
+
+commit d44e5fc6874b1ed2a8bc141e7fb52a9c389b547c
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Tue Jun 18 00:21:57 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Tue Jun 18 00:21:57 2024 -0400
+
+    update schema
+
+commit 111a0848fb90b9c7c7a405437e6710d09f3c8a63
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Tue Jun 18 00:21:41 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Tue Jun 18 00:21:41 2024 -0400
+
+    add dayjs
+
+commit 73a813118d9a40d97726f488e5844a2ec157675d
+Merge: b5ad7a1 03500a7
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sat Jun 15 15:30:55 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sat Jun 15 15:30:55 2024 -0400
+
+    Merge pull request #6 from vichudo/fix/lower-case-email-lgin
+    
+    Fix/lower case email lgin
+
+commit 03500a7fbec228d55a7ab8be32f2700fc8e88860
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 15 15:29:37 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 15 15:29:37 2024 -0400
+
+    auth with lowercase email
+
+commit 803cf42a03d19bb7f1034a462254d85d4f16c17e
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 15 15:28:31 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 15 15:28:31 2024 -0400
+
+    remove unused imports
+
+commit b5ad7a15ac27c79681ba696a7ed3aaa2ae3ed122
+Merge: d8d7cda 86fbb03
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sat Jun 15 15:21:52 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sat Jun 15 15:21:52 2024 -0400
+
+    Merge pull request #5 from vichudo/feat/validators
+    
+    Feat/validators
+
+commit 86fbb03757f0598e9be5723bc44305bffe5baa76
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 15 15:19:38 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 15 15:19:38 2024 -0400
+
+    improve main form
+
+commit d36a543d796bc07d8b700f3e10ced62f8100b1cc
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 15 15:19:25 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 15 15:19:25 2024 -0400
+
+    add loader to initial page
+
+commit c35770706461428859a84ef64a86fa86227d76b8
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 15 15:19:12 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 15 15:19:12 2024 -0400
+
+    allow copy data in edit modal
+
+commit d8d7cda4a02444db1eae7a52dd74e7da6f99a72d
+Merge: 9e6985e d548b44
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sat Jun 15 03:25:28 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sat Jun 15 03:25:28 2024 -0400
+
+    Merge pull request #4 from vichudo/feat/edit-data
+    
+    fix ridiculous mistake
+
+commit d548b44cff58b84b54efd55d0568cf5cd06b45d9
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 15 03:24:38 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 15 03:24:38 2024 -0400
+
+    fix ridiculous mistake
+
+commit 9e6985eb293fa10917a68aaf60579e9b13387625
+Merge: 4341f59 ae003c1
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sat Jun 15 03:16:44 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sat Jun 15 03:16:44 2024 -0400
+
+    Merge pull request #3 from vichudo/feat/edit-data
+    
+    Feat/edit data
+
+commit ae003c18b7a9a255f667b8deccf0c9cc6c4077e9
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 15 03:14:45 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 15 03:14:45 2024 -0400
+
+    improver look n feel + pagination an  search
+
+commit 6917f6c19ea48b5baa404028fd2c045156e49195
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 15 03:14:27 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 15 03:14:27 2024 -0400
+
+    improve retrieve contacts router
+
+commit 88c85f84bb2375abfeb3f3eef787498ab42b1aec
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 15 03:14:02 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 15 03:14:02 2024 -0400
+
+    remove reset button and disabled
+
+commit 4341f59db23e9265379bfe8c4cb15e42b4e64393
+Merge: 333d3a9 d681fb3
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Fri Jun 14 02:46:40 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Fri Jun 14 02:46:40 2024 -0400
+
+    Merge pull request #2 from vichudo/feat/edit-data
+    
+    Feat/edit data
+
+commit d681fb38a50fa572b4c6c62c9c293fbf24a7550d
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri Jun 14 02:43:57 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri Jun 14 02:43:57 2024 -0400
+
+    add dummy playground stuff
+
+commit e915b08f8f0f52bd49ff481171f64bc007dddf2f
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri Jun 14 02:41:26 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri Jun 14 02:41:26 2024 -0400
+
+    add edit function
+
+commit 92dc6b196189fe1824b1be99eb5ddb6898c5de07
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri Jun 14 02:40:28 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri Jun 14 02:40:28 2024 -0400
+
+    update main form
+
+commit 27f462184fca981800599bf179eec6d46bc3313e
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri Jun 14 02:39:24 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri Jun 14 02:39:24 2024 -0400
+
+    add modal hook
+
+commit b959f384265085f5735e35f169e6ce1435897e93
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri Jun 14 02:39:03 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri Jun 14 02:39:03 2024 -0400
+
+    improve form
+
+commit 53775bfce4364627ab4ea1e21404d5a84beebf47
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri Jun 14 02:38:37 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri Jun 14 02:38:37 2024 -0400
+
+    deprecate postgres
+
+commit f0901328369bafb4625d1fd801e0cee043c2bac1
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri Jun 14 02:38:27 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri Jun 14 02:38:27 2024 -0400
+
+    update to mongo
+
+commit 3993109bdf7fce726168b2aff6f1c67bfe08ac10
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri Jun 14 02:38:19 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri Jun 14 02:38:19 2024 -0400
+
+    update deps
+
+commit e950c2497fe66e224a128bcc7016e3e25fd6661b
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri Jun 14 02:37:11 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri Jun 14 02:37:11 2024 -0400
+
+    create strict rut search
+
+commit 7e2641311fda777483ea17c3534ef258a218f5ae
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Thu Jun 13 20:44:45 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Thu Jun 13 20:44:45 2024 -0400
+
+    chore: update deps
+
+commit 333d3a9b2314e73d293751dad7082898baa37f42
+Merge: e7c340f d9b904e
+Author:     Vicente González <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 01:25:01 2024 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: Sun Jun 9 01:25:01 2024 -0400
+
+    Merge pull request #1 from vichudo/feat/export-excel
+    
+    feat(ContactDashboard): Export excel
+
+commit d9b904e19f946062bae74c1741c22c16b1490963
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 01:21:53 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 9 01:21:53 2024 -0400
+
+    update front end to download excel
+
+commit c57a8fd24d0d761cf05f428cfb1786af19e2ad13
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 01:21:21 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 9 01:21:21 2024 -0400
+
+    create a router to deliver excel file
+
+commit 96debea7bbbd89b4cfaed47008e1a57511421880
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 01:20:34 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 9 01:20:34 2024 -0400
+
+    add exceljs
+
+commit 19d4e81ec54534e03e2c9278b9750f12fb87df1e
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 01:20:07 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 9 01:20:07 2024 -0400
+
+    add minimal CTA to contact us
+
+commit e7c340f66e1c1dd485f80bfc73ced73eee28a0be
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 00:39:30 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 9 00:39:30 2024 -0400
+
+    only show signout if authed
+
+commit dfb7d9259996c3f91c01611b5890f4803a86d835
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 00:35:30 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 9 00:35:30 2024 -0400
+
+    add delete feature and loading to contact page
+
+commit 13ce758b637a3a57ed1b772ae292d610e0ba4ef8
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 00:33:05 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 9 00:33:05 2024 -0400
+
+    add feedback to submission
+
+commit f5c4bf3af198f4a63ba2c86120c79d72f46a5847
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 00:32:31 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 9 00:32:31 2024 -0400
+
+    minor UI fixes
+
+commit 501d0b0115de944a96f88c8b5fcc1f7c008ca8a9
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 00:31:11 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 9 00:31:11 2024 -0400
+
+    add autoredirect to index page
+
+commit 49394eefa4eeeb6e59c11682ff9a4c303f3b68fb
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 00:30:30 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 9 00:30:30 2024 -0400
+
+    add simple CTA in main page
+
+commit 6b2a5ba53967eb89cfc9abfdec87ca57b2f9d80c
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 00:28:28 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 9 00:28:28 2024 -0400
+
+    add warning modal
+
+commit 1cfd1c3a95518c9e390c66e64a86ec2f33544160
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 00:28:15 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 9 00:28:15 2024 -0400
+
+    update deps
+
+commit 82e0a2a6ed95057e838a2938afe6d9660b0f1b70
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sun Jun 9 00:28:01 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sun Jun 9 00:28:01 2024 -0400
+
+    create delete hard by ID contact method
+
+commit a98d4a27889503eda9ea28781340ad4995d17c56
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Wed Jun 5 23:38:29 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Wed Jun 5 23:38:29 2024 -0400
+
+    create pages and call components
+
+commit 40736623c3fc3183f992d87e87e255d78eaf82fe
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Wed Jun 5 23:38:11 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Wed Jun 5 23:38:11 2024 -0400
+
+    update submit procedure not to create workspace
+
+commit fefb04ffd1327950851f4c6bab37d67b10e470a9
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Wed Jun 5 23:37:10 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Wed Jun 5 23:37:10 2024 -0400
+
+    create core contacts table
+
+commit e39edf3c1558739cd014c671942d5e2ed16aae29
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Wed Jun 5 23:36:48 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Wed Jun 5 23:36:48 2024 -0400
+
+    update tailwind config
+
+commit 10243a28038a755b33da35e040dd79c388038c85
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Wed Jun 5 23:36:30 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Wed Jun 5 23:36:30 2024 -0400
+
+    create core form
+
+commit ce637b9c2cd4fcc44b179f5b3cb3d3b34b570b03
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Wed Jun 5 23:36:13 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Wed Jun 5 23:36:13 2024 -0400
+
+    add generic modal component
+
+commit 57ec8a2d7a384b2a097061f5171fd0e6a2d78072
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Wed Jun 5 23:35:48 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Wed Jun 5 23:35:48 2024 -0400
+
+    create navbar component
+
+commit 9facca1c47384f41c86f9e0444c9e50a1dcb607a
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Wed Jun 5 23:21:47 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Wed Jun 5 23:21:47 2024 -0400
+
+    update dependencies
+
+commit 24cc83d0c0690efc57376dd5fc4a12a6a8095c71
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 1 23:36:55 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 1 23:36:55 2024 -0400
+
+    create pages
+
+commit c675140e8789819cdf4c942b700254f952e49cf6
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 1 23:36:20 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 1 23:36:20 2024 -0400
+
+    add toaster and trpc to root _app
+
+commit 8175ce1096edae4dd09d087c756aed5428671342
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 1 23:33:40 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 1 23:33:40 2024 -0400
+
+    create form component
+
+commit 80a2c09359dc923ca36eef66fe6233511e624428
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 1 23:30:32 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 1 23:30:32 2024 -0400
+
+    add login and signup logic
+
+commit 748e97736d748228cdb2c21225a9f37cb7a352d9
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 1 23:29:49 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 1 23:29:49 2024 -0400
+
+    remove unused lint file
+
+commit 17997f308607fc7296a4fab4d199de48bd76aab3
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 1 23:28:55 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 1 23:28:55 2024 -0400
+
+    create routers setup
+
+commit 73ea84a95a79a27080cf2ee5ccf947e90c17d93f
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 1 23:28:23 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 1 23:28:23 2024 -0400
+
+    create initial dashboard layout
+
+commit 82b328c1dc4bb296d1fc2824a35b146099eb57c6
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 1 23:27:46 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 1 23:27:46 2024 -0400
+
+    setup initial server files
+
+commit 16e90b93ac4f93746120089f3d1ff11e5a8bc4b7
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 1 23:27:04 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 1 23:27:04 2024 -0400
+
+    fully update the schema
+
+commit edf7c2241e5baf46b991543dbc26bb09233b82b9
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 1 23:26:47 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 1 23:26:47 2024 -0400
+
+    remove discord from env logic validation
+
+commit c3e652cc965e3d62977f8801b5c7b7b5043b6c92
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Sat Jun 1 23:26:21 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Sat Jun 1 23:26:21 2024 -0400
+
+    feat: update dependencies and config
+
+commit 9ff090d7993f718b5405cae7a705eb3e9b00eb7a
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri May 31 00:19:37 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri May 31 00:19:37 2024 -0400
+
+    chore: remove unused validations
+
+commit e6a5a4a40e275fb48a82ea452580aa20f9b8ab21
+Author:     vichudo <vichudo@gmail.com>
+AuthorDate: Fri May 31 00:12:58 2024 -0400
+Commit:     vichudo <vichudo@gmail.com>
+CommitDate: Fri May 31 00:12:58 2024 -0400
+
+    first commit
